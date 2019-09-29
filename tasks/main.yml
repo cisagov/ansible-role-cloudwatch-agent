@@ -1,2 +1,33 @@
 ---
-# tasks file for skeleton
+- name: Install AWS CloudWatch Agent
+  block:
+    - name: Install xz-utils (required when using deb parameter of apt module)
+      package:
+        name:
+          - xz-utils
+    - name: Download the AWS CloudWatch Agent Debian package
+      get_url:
+        url: https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
+        dest: /tmp/amazon-cloudwatch-agent.deb
+    - name: Install AWS CloudWatch Agent Debian package
+      apt:
+        deb: /tmp/amazon-cloudwatch-agent.deb
+  when: ansible_facts['os_family'] == 'Debian'
+  tags:
+    - cloudwatch-agent
+- name: Install AWS CloudWatch Agent
+  block:
+    - name: Install AWS CloudWatch Agent RPM
+      dnf:
+        name:
+          - https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
+  when: ansible_facts['os_family'] == 'RedHat'
+  tags:
+    - cloudwatch-agent
+- name: Enable and start AWS CloudWatch Agent
+  service:
+    name: amazon-cloudwatch-agent
+    enabled: yes
+    state: started
+  tags:
+    - cloudwatch-agent
