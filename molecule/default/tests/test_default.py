@@ -16,7 +16,7 @@ def test_packages(host, pkg):
     assert host.package(pkg).is_installed
 
 
-@pytest.mark.parametrize("svc", ["amazon-cloudwatch-agent"])
-def test_services(host, svc):
+@pytest.mark.parametrize("service", ["amazon-cloudwatch-agent"])
+def test_services(host, service):
     """Test that the expected services were enabled."""
-    assert host.service(svc).is_enabled
+    assert host.service(service).is_enabled
