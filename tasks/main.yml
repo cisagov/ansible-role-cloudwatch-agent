@@ -24,10 +24,13 @@
   when: ansible_facts['os_family'] == 'RedHat'
   tags:
     - cloudwatch-agent
-- name: Enable and start AWS CloudWatch Agent
+# The AWS CloudWatch Agent systemd unit kicks off a process that
+# starts the CloudWatch Agent and then dies.  Therefore we can't start
+# it here because it will be started again during the idempotence test
+# and therefore will fail idempotence.
+- name: Enable AWS CloudWatch Agent
   service:
     name: amazon-cloudwatch-agent
     enabled: yes
-    state: started
   tags:
     - cloudwatch-agent
