@@ -15,6 +15,10 @@ Agent, it must be started with an instance role that includes the
 [here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/create-iam-roles-for-cloudwatch-agent.html)
 for more details.
 
+See
+[here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html)
+for details on configuring the Amazon CloudWatch Agent.
+
 ## Requirements ##
 
 None.
