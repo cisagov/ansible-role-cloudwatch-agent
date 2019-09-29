@@ -4,13 +4,16 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-cloudwatch-agent.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cloudwatch-agent/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-cloudwatch-agent.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cloudwatch-agent/context:python)
 
-This is a skeleton project that can be used to quickly get a new
-[cisagov](https://github.com/cisagov) Ansible role GitHub project
-started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and a [Travis
-CI](https://travis-ci.com) configuration appropriate for an Ansible
-role.
+This is an Ansible role that installs and enables the [Amazon
+CloudWatch
+Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html)
+SystemD service.
+
+Note that for an EC2 instance to successfully run the CloudWatch
+Agent, it must be started with an instance role that includes the
+"CloudWatchAgentServerPolicy" policy.  See
+[here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/create-iam-roles-for-cloudwatch-agent.html)
+for more details.
 
 ## Requirements ##
 
@@ -29,11 +32,11 @@ None.
 Here's how to use it in a playbook:
 
 ```yaml
-- hosts: all
+- hosts: ec2
   become: yes
   become_method: sudo
   roles:
-    - skeleton
+    - cloudwatch-agent
 ```
 
 ## Contributing ##
