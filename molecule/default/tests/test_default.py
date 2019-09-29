@@ -10,7 +10,14 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-@pytest.mark.parametrize("x", [True])
-def test_packages(host, x):
-    """Run a dummy test, just to show what one would look like."""
-    assert x
+@pytest.mark.parametrize("pkg", ["amazon-cloudwatch-agent"])
+def test_packages(host, pkg):
+    """Test that the expected packages were installed."""
+    assert host.package(pkg).is_installed
+
+
+@pytest.mark.parametrize("svc", ["amazon-cloudwatch-agent"])
+def test_services(host, svc):
+    """Test that the expected services were enabled and started."""
+    s = host.service(svc)
+    assert s.is_enabled and s.is_started
