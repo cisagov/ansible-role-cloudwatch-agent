@@ -32,6 +32,9 @@ platforms:
   # Fedora 30.
   # - name: fedora30_systemd
   #   image: geerlingguy/docker-fedora30-ansible:latest
+  #   privileged: yes
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
   #   command: /lib/systemd/systemd
   #   pre_build_image: yes
 provisioner:
