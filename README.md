@@ -7,7 +7,7 @@
 This is an Ansible role that installs and enables the [Amazon
 CloudWatch
 Agent](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html)
-SystemD service.
+systemd service.
 
 Note that for an EC2 instance to successfully run the CloudWatch
 Agent, it must be started with an instance role that includes the
