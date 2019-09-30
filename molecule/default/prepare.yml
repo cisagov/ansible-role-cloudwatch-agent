@@ -4,10 +4,10 @@
 # viewed here:
 # https://github.com/philpep/testinfra/blob/master/testinfra/modules/service.py#L51-L63.
 #
-# The Debian 9 and Debian 10 Docker images that we are using ( and )
-# suffer from this issue; therefore, we need to install the init
-# package as a workaround.  Any real (non-Docker) host will have this
-# package installed anyway.
+# The Debian 9 and Debian 10 Docker images that we are using suffer
+# from this issue; therefore, we need to install the init package as a
+# workaround.  Any real (non-Docker) host will have this package
+# installed anyway.
 #
 # This is a known testinfra issue.  See
 # https://github.com/philpep/testinfra/issues/416 for more details.
