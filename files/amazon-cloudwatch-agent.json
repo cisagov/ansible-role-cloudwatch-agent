@@ -18,11 +18,6 @@
             "log_stream_name": "{instance_id}"
           },
           {
-            "file_path": "/var/log/audit/audit.log",
-            "log_group_name": "audit",
-            "log_stream_name": "{instance_id}"
-          },
-          {
             "file_path": "/var/log/clamav/clamav.log",
             "log_group_name": "clamav",
             "log_stream_name": "{instance_id}"
@@ -50,11 +45,6 @@
           {
             "file_path": "/var/log/ipa-client-uninstall.log",
             "log_group_name": "ipa-client-uninstall",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/syslog",
-            "log_group_name": "syslog",
             "log_stream_name": "{instance_id}"
           }
         ]
