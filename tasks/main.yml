@@ -24,11 +24,18 @@
   when: ansible_facts['os_family'] == 'RedHat'
   tags:
     - cloudwatch-agent
-- name: Copy over distribution-specific CloudWatch Agent configuration
-  copy:
-    src: amazon-cloudwatch-agent.json
-    dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-    mode: 0600
+- name: Copy over generic CloudWatch Agent configuration, if necessary
+  block:
+    - name: Check if a CloudWatch Agent configuration already exists
+      stat:
+        path: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+      register: agent_config
+    - name: Copy over generic CloudWatch Agent configuration, if necessary
+      copy:
+        src: amazon-cloudwatch-agent.json
+        dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+        mode: 0600
+      when: not agent_config.stat.exists
   tags:
     - cloudwatch-agent
 - name: Add Debian-specific sections to CloudWatch Agent configuration
@@ -53,6 +60,8 @@
               log_stream_name: {instance_id}
       when: not syslog_check.tested
   when: ansible_facts['os_family'] == 'Debian'
+  tags:
+    - cloudwatch-agent
 # The AWS CloudWatch Agent systemd unit kicks off a process that
 # starts the CloudWatch Agent and then dies.  Therefore we can't start
 # it here because it will be started again during the idempotence test
