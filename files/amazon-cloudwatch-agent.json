@@ -9,42 +9,32 @@
         "collect_list": [
           {
             "file_path": "/var/log/aide/aide.log",
-            "log_group_name": "aide",
+            "log_group_name": "/instance-logs/aide",
             "log_stream_name": "{instance_id}"
           },
           {
             "file_path": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.logs",
-            "log_group_name": "amazon-cloudwatch-agent",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/clamav/clamav.log",
-            "log_group_name": "clamav",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/clamav/freshclam.log",
-            "log_group_name": "freshclam",
+            "log_group_name": "/instance-logs/amazon-cloudwatch-agent",
             "log_stream_name": "{instance_id}"
           },
           {
             "file_path": "/var/log/cloud-init.log",
-            "log_group_name": "cloud-init",
+            "log_group_name": "/instance-logs/cloud-init",
             "log_stream_name": "{instance_id}"
           },
           {
             "file_path": "/var/log/cloud-init-output.log",
-            "log_group_name": "cloud-init-output",
+            "log_group_name": "/instance-logs/cloud-init-output",
             "log_stream_name": "{instance_id}"
           },
           {
             "file_path": "/var/log/ipa-client-install.log",
-            "log_group_name": "ipa-client-install",
+            "log_group_name": "/instance-logs/ipa-client-install",
             "log_stream_name": "{instance_id}"
           },
           {
             "file_path": "/var/log/ipa-client-uninstall.log",
-            "log_group_name": "ipa-client-uninstall",
+            "log_group_name": "/instance-logs/ipa-client-uninstall",
             "log_stream_name": "{instance_id}"
           }
         ]
