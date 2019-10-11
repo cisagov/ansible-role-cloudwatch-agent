@@ -48,7 +48,7 @@
             path: "/logs/logs_collected/files/collect_list/*/file_path"
             value: /var/log/syslog
       register: syslog_check
-    - name: Add CloudWatch Agent configuration for syslog
+    - name: Add CloudWatch Agent configuration for syslog, if necessary
       json_patch:
         src: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
         operations:
