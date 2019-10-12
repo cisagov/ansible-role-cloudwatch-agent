@@ -4,8 +4,8 @@
 # viewed here:
 # https://github.com/philpep/testinfra/blob/master/testinfra/modules/service.py#L51-L63.
 #
-# The Debian 9 and Debian 10 Docker images that we are using suffer
-# from this issue; therefore, we need to install the init package as a
+# The Ubuntu and Debian Docker images that we are using suffer from
+# this issue; therefore, we need to install the init package as a
 # workaround.  Any real (non-Docker) host will have this package
 # installed anyway.
 #
@@ -14,9 +14,9 @@
 - name: Group hosts by OS distribution
   hosts: all
   tasks:
-    - name: Group hosts by OS distribution
+    - name: Group hosts by OS family
       group_by:
-        key: os_{{ ansible_facts['distribution'] }}
+        key: os_{{ ansible_facts['os_family'] }}
 - name: Install init (Debian)
   hosts: os_Debian
   tasks:
@@ -24,3 +24,19 @@
       package:
         name:
           - init
+
+# The Ubuntu 16.04 Docker image we are using
+# (geerlingguy/docker-ubuntu1604-ansible:latest) needs a cache update
+# before it can install anything.
+- name: Group hosts by OS distribution and major version
+  hosts: all
+  tasks:
+    - name: Group hosts by OS distribution and major version
+      group_by:
+        key: os_{{ ansible_facts['distribution'] }}_{{ ansible_facts['distribution_major_version'] }}
+- name: Update apt cache (Ubuntu 16)
+  hosts: os_Ubuntu_16
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
