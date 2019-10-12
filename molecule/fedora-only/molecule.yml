@@ -28,7 +28,7 @@ provisioner:
   lint:
     name: ansible-lint
 scenario:
-  name: default
+  name: fedora-only
 verifier:
   name: testinfra
   directory: ../tests
