@@ -24,42 +24,11 @@
   when: ansible_facts['os_family'] == 'RedHat'
   tags:
     - cloudwatch-agent
-- name: Copy over generic CloudWatch Agent configuration, if necessary
-  block:
-    - name: Check if a CloudWatch Agent configuration already exists
-      stat:
-        path: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-      register: agent_config
-    - name: Copy over generic CloudWatch Agent configuration, if necessary
-      copy:
-        src: amazon-cloudwatch-agent.json
-        dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-        mode: 0600
-      when: not agent_config.stat.exists
-  tags:
-    - cloudwatch-agent
-- name: Add Debian-specific sections to CloudWatch Agent configuration
-  block:
-    - name: Check if CloudWatch Agent configuration already has a section for syslog
-      json_patch:
-        src: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-        operations:
-          - op: test
-            path: "/logs/logs_collected/files/collect_list/*/file_path"
-            value: /var/log/syslog
-      register: syslog_check
-    - name: Add CloudWatch Agent configuration for syslog, if necessary
-      json_patch:
-        src: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-        operations:
-          - op: add
-            path: "/logs/logs_collected/files/collect_list/-"
-            value:
-              file_path: /var/log/syslog
-              log_group_name: /instance-logs/syslog
-              log_stream_name: '{instance_id}'
-      when: not syslog_check.tested
-  when: ansible_facts['os_family'] == 'Debian'
+- name: Copy over CloudWatch Agent configuration
+  copy:
+    src: amazon-cloudwatch-agent.json
+    dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+    mode: 0600
   tags:
     - cloudwatch-agent
 # The AWS CloudWatch Agent systemd unit kicks off a process that
