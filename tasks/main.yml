@@ -57,7 +57,7 @@
             value:
               file_path: /var/log/syslog
               log_group_name: /instance-logs/syslog
-              log_stream_name: {instance_id}
+              log_stream_name: '{instance_id}'
       when: not syslog_check.tested
   when: ansible_facts['os_family'] == 'Debian'
   tags:
