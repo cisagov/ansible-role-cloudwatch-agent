@@ -1,5 +1,5 @@
 ---
-- name: Install AWS CloudWatch Agent
+- name: Install AWS CloudWatch Agent (Debian)
   block:
     - name: Install xz-utils (required when using deb parameter of apt module)
       package:
@@ -15,13 +15,24 @@
   when: ansible_facts['os_family'] == 'Debian'
   tags:
     - cloudwatch-agent
-- name: Install AWS CloudWatch Agent
+- name: Install AWS CloudWatch Agent (RedHat)
   block:
     - name: Install AWS CloudWatch Agent RPM
       dnf:
         name:
           - https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
   when: ansible_facts['os_family'] == 'RedHat'
+  tags:
+    - cloudwatch-agent
+# Note that we are using a single config file for all instances,
+# regardless of Linux distribution.  This means that the config file
+# may well (and most likely does) reference log files that do not
+# exist on all instances.
+- name: Copy over CloudWatch Agent configuration
+  copy:
+    src: amazon-cloudwatch-agent.json
+    dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+    mode: 0600
   tags:
     - cloudwatch-agent
 # The AWS CloudWatch Agent systemd unit kicks off a process that

@@ -19,6 +19,14 @@ See
 [here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html)
 for details on configuring the Amazon CloudWatch Agent.
 
+Note that this Ansible role makes use of the [`json_patch` Ansible
+module](https://github.com/ParticleDecay/ansible-jsonpatch), which is
+proposed for inclusion into the main Ansible project.  (For more
+information about what JSON Patch is, see
+[here](http://jsonpatch.com/).)  A copy of the relevant piece of
+Python code from that repository is included in the `library`
+directory, so there is no extra action required by the user.
+
 ## Requirements ##
 
 None.
@@ -63,4 +71,4 @@ with this waiver of copyright interest.
 
 ## Author Information ##
 
-First Last - <first.last@trio.dhs.gov>
+First Last - <jeremy.frasier@trio.dhs.gov>

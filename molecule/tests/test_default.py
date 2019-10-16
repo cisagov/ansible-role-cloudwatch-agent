@@ -16,6 +16,18 @@ def test_packages(host, pkg):
     assert host.package(pkg).is_installed
 
 
+@pytest.mark.parametrize(
+    "f", ["/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json"]
+)
+def test_files(host, f):
+    """Test that the expected files were installed."""
+    assert host.file(f).exists
+    assert host.file(f).is_file
+    assert host.file(f).user == "root"
+    assert host.file(f).group == "root"
+    assert host.file(f).mode == 0o600
+
+
 @pytest.mark.parametrize("service", ["amazon-cloudwatch-agent"])
 def test_services(host, service):
     """Test that the expected services were enabled."""
