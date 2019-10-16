@@ -24,6 +24,10 @@
   when: ansible_facts['os_family'] == 'RedHat'
   tags:
     - cloudwatch-agent
+# Note that we are using a single config file for all instances,
+# regardless of Linux distribution.  This means that the config file
+# may well (and most likely does) reference log files that do not
+# exist on all instances.
 - name: Copy over CloudWatch Agent configuration
   copy:
     src: amazon-cloudwatch-agent.json
