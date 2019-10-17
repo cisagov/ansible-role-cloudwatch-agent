@@ -10,7 +10,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-@pytest.mark.parametrize("pkg", ["amazon-cloudwatch-agent"])
+@pytest.mark.parametrize("pkg", ["amazon-cloudwatch-agent", "rsyslog"])
 def test_packages(host, pkg):
     """Test that the expected packages were installed."""
     assert host.package(pkg).is_installed
@@ -28,7 +28,7 @@ def test_files(host, f):
     assert host.file(f).mode == 0o600
 
 
-@pytest.mark.parametrize("service", ["amazon-cloudwatch-agent"])
+@pytest.mark.parametrize("service", ["amazon-cloudwatch-agent", "rsyslog"])
 def test_services(host, service):
     """Test that the expected services were enabled."""
     assert host.service(service).is_enabled
