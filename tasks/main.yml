@@ -24,6 +24,7 @@
   when: ansible_facts['os_family'] == 'RedHat'
   tags:
     - cloudwatch-agent
+
 # Note that we are using a single config file for all instances,
 # regardless of Linux distribution.  This means that the config file
 # may well (and most likely does) reference log files that do not
@@ -35,6 +36,7 @@
     mode: 0600
   tags:
     - cloudwatch-agent
+
 # The AWS CloudWatch Agent systemd unit kicks off a process that
 # starts the CloudWatch Agent and then dies.  Therefore we can't start
 # it here because it will be started again during the idempotence test
@@ -45,3 +47,15 @@
     enabled: yes
   tags:
     - cloudwatch-agent
+
+# Configure systemd-journald to forward journal logs to syslog, so
+# that the Amazon CloudWatch Agent can in turn forward them to
+# CloudWatch.
+- name: Forward journald log entries to syslog
+  lineinfile:
+    path: /etc/systemd/journald.conf
+    regexp: '^#?ForwardToSyslog'
+    line: ForwardToSyslog=yes
+    # This forces lineinfile not to append the line if the regex fails
+    # to match
+    backrefs: yes
