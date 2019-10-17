@@ -32,3 +32,12 @@ def test_files(host, f):
 def test_services(host, service):
     """Test that the expected services were enabled."""
     assert host.service(service).is_enabled
+
+
+def test_systemd_journald_config(host):
+    """Test that the journald config was altered as expected."""
+    f = host.file("/etc/systemd/journald.conf")
+    assert f.exists
+    assert f.is_file
+    assert f.contains(r"^ForwardToSyslog=yes")
+    assert not f.contains(r"^ForwardToSyslog=no")
