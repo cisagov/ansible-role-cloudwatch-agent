@@ -48,10 +48,24 @@
   tags:
     - cloudwatch-agent
 
-# Configure systemd-journald to forward journal logs to syslog, so
+- name: Install and enable rsyslog
+  block:
+    - name: Install rsyslog
+      package:
+        name:
+          - rsyslog
+    - name: Enable rsyslog
+      service:
+        name: rsyslog
+        enabled: yes
+  tags:
+    - cloudwatch-agent
+    - rsyslog
+
+# Configure systemd-journald to forward journal logs to rsyslog, so
 # that the Amazon CloudWatch Agent can in turn forward them to
 # CloudWatch.
-- name: Forward journald log entries to syslog
+- name: Forward journald log entries to rsyslog
   lineinfile:
     path: /etc/systemd/journald.conf
     regexp: '^#?ForwardToSyslog'
@@ -59,3 +73,6 @@
     # This forces lineinfile not to append the line if the regex fails
     # to match
     backrefs: yes
+  tags:
+    - cloudwatch-agent
+    - journald
