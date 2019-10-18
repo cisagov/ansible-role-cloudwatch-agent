@@ -41,3 +41,4 @@ def test_systemd_journald_config(host):
     assert f.is_file
     assert f.contains(r"^ForwardToSyslog=yes")
     assert not f.contains(r"^ForwardToSyslog=no")
+    assert f.contains(r"^MaxLevelSyslog=debug")
