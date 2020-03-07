@@ -1,6 +1,6 @@
 # ansible-role-cloudwatch-agent #
 
-[![Build Status](https://travis-ci.com/cisagov/ansible-role-cloudwatch-agent.svg?branch=develop)](https://travis-ci.com/cisagov/ansible-role-cloudwatch-agent)
+[![GitHub Build Status](https://github.com/cisagov/ansible-role-cloudwatch-agent/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-cloudwatch-agent/actions)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-cloudwatch-agent.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cloudwatch-agent/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-cloudwatch-agent.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cloudwatch-agent/context:python)
 
