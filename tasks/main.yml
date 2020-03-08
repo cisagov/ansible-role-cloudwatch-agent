@@ -23,8 +23,6 @@
     src: amazon-cloudwatch-agent.json
     dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
     mode: 0600
-  tags:
-    - cloudwatch-agent
 
 # The AWS CloudWatch Agent systemd unit kicks off a process that
 # starts the CloudWatch Agent and then dies.  Therefore we can't start
@@ -34,22 +32,15 @@
   service:
     name: amazon-cloudwatch-agent
     enabled: yes
-  tags:
-    - cloudwatch-agent
 
-- name: Install and enable rsyslog
-  block:
-    - name: Install rsyslog
-      package:
-        name:
-          - rsyslog
-    - name: Enable rsyslog
-      service:
-        name: rsyslog
-        enabled: yes
-  tags:
-    - cloudwatch-agent
-    - rsyslog
+- name: Install rsyslog
+  package:
+    name:
+      - rsyslog
+- name: Enable rsyslog
+  service:
+    name: rsyslog
+    enabled: yes
 
 # Configure systemd-journald to forward all journal logs to rsyslog,
 # so that the Amazon CloudWatch Agent can in turn forward them to
@@ -65,6 +56,3 @@
   loop:
     - {regex: '^#?ForwardToSyslog', line: "ForwardToSyslog=yes"}
     - {regex: '^#?MaxLevelSyslog', line: "MaxLevelSyslog=debug"}
-  tags:
-    - cloudwatch-agent
-    - journald
