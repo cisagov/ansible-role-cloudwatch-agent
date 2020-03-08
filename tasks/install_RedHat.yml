@@ -1,0 +1,5 @@
+---
+- name: Install AWS CloudWatch Agent RPM
+  dnf:
+    name:
+      - https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
