@@ -15,3 +15,17 @@
     - name: Update apt cache
       apt:
         update_cache: yes
+
+# The Fedora Docker images we are using
+# (geerlingguy/docker-fedora29-ansible:latest and
+# geerlingguy/docker-fedora31-ansible:latest) require the dnf cache to
+# be updated before they can successfully install anything.  At least,
+# they keep giving this error if I don't update the dnf cache:
+#
+# No such file or directory: '/var/cache/dnf/metadata_lock.pid'
+- name: Update dnf cache (Fedora)
+  hosts: os_Fedora
+  tasks:
+    - name: Update dnf cache
+      dnf:
+        update_cache: yes
