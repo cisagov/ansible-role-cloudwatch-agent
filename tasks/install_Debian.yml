@@ -5,7 +5,7 @@
       - xz-utils
 - name: Download the AWS CloudWatch Agent Debian package
   get_url:
-    url: https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
+    url: "{{ url }}"
     dest: /tmp/amazon-cloudwatch-agent.deb
 - name: Install AWS CloudWatch Agent Debian package
   apt:

@@ -1,0 +1,5 @@
+---
+- name: Install AWS CloudWatch Agent RPM via yum
+  yum:
+    name:
+      - "{{ url }}"

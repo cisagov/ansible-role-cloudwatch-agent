@@ -1,0 +1,5 @@
+---
+# vars file for Debian
+
+# The Amazon CloudWatch Agent URL
+url: https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb

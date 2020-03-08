@@ -1,0 +1,5 @@
+---
+# vars file for Ubuntu
+
+# The Amazon CloudWatch Agent URL
+url: https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
