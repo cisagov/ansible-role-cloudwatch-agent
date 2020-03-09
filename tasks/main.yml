@@ -1,29 +1,33 @@
 ---
-- name: Install AWS CloudWatch Agent (Debian)
-  block:
-    - name: Install xz-utils (required when using deb parameter of apt module)
-      package:
-        name:
-          - xz-utils
-    - name: Download the AWS CloudWatch Agent Debian package
-      get_url:
-        url: https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
-        dest: /tmp/amazon-cloudwatch-agent.deb
-    - name: Install AWS CloudWatch Agent Debian package
-      apt:
-        deb: /tmp/amazon-cloudwatch-agent.deb
-  when: ansible_facts['os_family'] == 'Debian'
-  tags:
-    - cloudwatch-agent
-- name: Install AWS CloudWatch Agent (RedHat)
-  block:
-    - name: Install AWS CloudWatch Agent RPM
-      dnf:
-        name:
-          - https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
-  when: ansible_facts['os_family'] == 'RedHat'
-  tags:
-    - cloudwatch-agent
+- name: Load var file with package URL based on the OS type
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        # The OS family and distribution for Kali is "Kali GNU/Linux",
+        # which is not an allowable file name in Linux due to the
+        # slash.  We will allow Kali to fall through and use the
+        # Debian vars file.
+        - Debian.yml
+      paths:
+        - vars
+
+- name: Load tasks file with install tasks based on the OS type
+  include: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - install_{{ ansible_distribution }}.yml
+        - install_{{ ansible_os_family }}.yml
+        # The OS family and distribution for Kali is "Kali GNU/Linux",
+        # which is not an allowable file name in Linux due to the
+        # slash.  We will allow Kali to fall through and use the
+        # Debian install tasks file.
+        - install_Debian.yml
+      paths:
+        - tasks
 
 # Note that we are using a single config file for all instances,
 # regardless of Linux distribution.  This means that the config file
@@ -34,8 +38,6 @@
     src: amazon-cloudwatch-agent.json
     dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
     mode: 0600
-  tags:
-    - cloudwatch-agent
 
 # The AWS CloudWatch Agent systemd unit kicks off a process that
 # starts the CloudWatch Agent and then dies.  Therefore we can't start
@@ -45,22 +47,15 @@
   service:
     name: amazon-cloudwatch-agent
     enabled: yes
-  tags:
-    - cloudwatch-agent
 
-- name: Install and enable rsyslog
-  block:
-    - name: Install rsyslog
-      package:
-        name:
-          - rsyslog
-    - name: Enable rsyslog
-      service:
-        name: rsyslog
-        enabled: yes
-  tags:
-    - cloudwatch-agent
-    - rsyslog
+- name: Install rsyslog
+  package:
+    name:
+      - rsyslog
+- name: Enable rsyslog
+  service:
+    name: rsyslog
+    enabled: yes
 
 # Configure systemd-journald to forward all journal logs to rsyslog,
 # so that the Amazon CloudWatch Agent can in turn forward them to
@@ -76,6 +71,3 @@
   loop:
     - {regex: '^#?ForwardToSyslog', line: "ForwardToSyslog=yes"}
     - {regex: '^#?MaxLevelSyslog', line: "MaxLevelSyslog=debug"}
-  tags:
-    - cloudwatch-agent
-    - journald
