@@ -12,7 +12,7 @@
         # Debian vars file.
         - Debian.yml
       paths:
-        - vars
+        - "{{ role_path }}/vars"
 
 - name: Load tasks file with install tasks based on the OS type
   include: "{{ lookup('first_found', params) }}"
@@ -27,7 +27,7 @@
         # Debian install tasks file.
         - install_Debian.yml
       paths:
-        - tasks
+        - "{{ role_path }}/tasks"
 
 # Note that we are using a single config file for all instances,
 # regardless of Linux distribution.  This means that the config file
