@@ -1,0 +1,6 @@
+---
+# vars file for Kali
+
+# The Amazon CloudWatch Agent URL.  This URL is identical to that for
+# Debian.
+url: https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
