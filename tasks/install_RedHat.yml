@@ -1,6 +1,8 @@
 ---
 - name: Install AWS CloudWatch Agent RPM via dnf
   dnf:
+    # The amazon-ssm-agent RPM is currently unsigned:
+    # https://github.com/aws/amazon-ssm-agent/issues/235
     disable_gpg_check: yes
     name:
       - "{{ url }}"
