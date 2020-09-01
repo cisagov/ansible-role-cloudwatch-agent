@@ -1,5 +1,6 @@
 ---
 - name: Install AWS CloudWatch Agent RPM via dnf
   dnf:
+    disable_gpg_check: yes
     name:
       - "{{ url }}"
