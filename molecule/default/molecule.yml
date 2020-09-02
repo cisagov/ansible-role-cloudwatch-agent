@@ -51,15 +51,13 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /lib/systemd/systemd
     pre_build_image: yes
-  # Remove fedora33 for now, since it can't even perform a dnf upgrade
-  # because of GPG signature errors.
-  # - name: fedora33_systemd
-  #   image: cisagov/docker-fedora33-ansible:latest
-  #   privileged: yes
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  #   command: /lib/systemd/systemd
-  #   pre_build_image: yes
+  - name: fedora33_systemd
+    image: cisagov/docker-fedora33-ansible:latest
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: /lib/systemd/systemd
+    pre_build_image: yes
   - name: ubuntu_bionic_systemd
     image: geerlingguy/docker-ubuntu1604-ansible:latest
     privileged: yes
