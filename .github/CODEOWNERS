@@ -4,4 +4,8 @@
 # the repo. Unless a later match takes precedence,
 # these owners will be requested for review when someone
 # opens a pull request.
+<<<<<<< HEAD
 * @dav3r @jsf9k
+=======
+* @dav3r @felddy @hillaryj @jsf9k @mcdonnnj
+>>>>>>> 33a4f13016a06edb168ea4069fac97ef6a6a112a
