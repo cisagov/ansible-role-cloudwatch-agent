@@ -8,7 +8,12 @@ galaxy_info:
     - aws
     - cloudwatch
   license: CC0
-  min_ansible_version: 2.0
+  # With the release of version 2.10, Ansible finally correctly
+  # identifies Kali Linux as being the Kali distribution of the Debian
+  # OS family.  This simplifies a lot of things for roles that support
+  # Kali Linux, so it makes sense to force the installation of Ansible
+  # 2.10 or newer.
+  min_ansible_version: 2.10
   platforms:
     - name: Amazon
       versions:
@@ -27,8 +32,9 @@ galaxy_info:
         - 33
     - name: Ubuntu
       versions:
-        - bionic
         - xenial
+        - bionic
+        - focal
   role_name: cloudwatch_agent
 
 dependencies: []
