@@ -4,11 +4,9 @@
   vars:
     params:
       files:
-        # Add regex_replace() filters to remove spaces and
-        # slashes. This allows the OS family/distribution for Kali,
-        # "Kali GNU/Linux", to be easily mapped to a vars file.
-        - "{{ ansible_distribution | regex_replace('[ /]', '_') }}.yml"
-        - "{{ ansible_os_family | regex_replace('[ /]', '_') }}.yml"
+        - "{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
       paths:
         - "{{ role_path }}/vars"
 
@@ -17,11 +15,9 @@
   vars:
     params:
       files:
-        # Add regex_replace() filters to remove spaces and
-        # slashes. This allows the OS family/distribution for Kali,
-        # "Kali GNU/Linux", to be easily mapped to a vars file.
-        - install_{{ ansible_distribution | regex_replace('[ /]', '_') }}.yml
-        - install_{{ ansible_os_family | regex_replace('[ /]', '_') }}.yml
+        - install_{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml
+        - install_{{ ansible_distribution }}.yml
+        - install_{{ ansible_os_family }}.yml
       paths:
         - "{{ role_path }}/tasks"
 
