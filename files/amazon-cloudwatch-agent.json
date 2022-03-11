@@ -137,58 +137,109 @@
     "metrics_collected": {
       "cpu": {
         "measurement": [
+          "cpu_usage_active",
+          "cpu_usage_guest",
+          "cpu_usage_guest_nice",
           "cpu_usage_idle",
           "cpu_usage_iowait",
-          "cpu_usage_user",
-          "cpu_usage_system"
+          "cpu_usage_irq",
+          "cpu_usage_nice",
+          "cpu_usage_softirq",
+          "cpu_usage_steal",
+          "cpu_usage_system",
+          "cpu_usage_user"
         ],
-        "metrics_collection_interval": 60,
         "resources": [
           "*"
-        ],
-        "totalcpu": false
+        ]
       },
       "disk": {
-        "measurement": [
-          "used_percent",
-          "inodes_free"
+        "ignore_file_system_types": [
+          "devtmpfs",
+          "sysfs",
+          "tmpfs"
         ],
-        "metrics_collection_interval": 60,
+        "measurement": [
+          "disk_total",
+          "disk_used",
+          "disk_used_percent"
+        ],
         "resources": [
           "*"
         ]
       },
       "diskio": {
         "measurement": [
-          "io_time",
-          "write_bytes",
-          "read_bytes",
-          "writes",
-          "reads"
+          "diskio_io_time",
+          "diskio_iops_in_progress",
+          "diskio_read_bytes",
+          "diskio_read_time",
+          "diskio_reads",
+          "diskio_write_bytes",
+          "diskio_write_time",
+          "diskio_writes"
         ],
-        "metrics_collection_interval": 60,
         "resources": [
           "*"
         ]
       },
+      "ethtool": {
+        "metrics_include": [
+          "ethtool_bw_in_allowance_exceeded",
+          "ethtool_bw_out_allowance_exceeded",
+          "ethtool_conntrack_allowance_exceeded",
+          "ethtool_linklocal_allowance_exceeded",
+          "ethtool_pps_allowance_exceeded"
+        ]
+      },
       "mem": {
         "measurement": [
+          "mem_active",
+          "mem_available",
+          "mem_available_percent",
+          "mem_buffered",
+          "mem_cached",
+          "mem_free",
+          "mem_inactive",
+          "mem_total",
+          "mem_used",
           "mem_used_percent"
-        ],
-        "metrics_collection_interval": 60
+        ]
+      },
+      "net": {
+        "measurement": [
+          "net_bytes_recv",
+          "net_bytes_sent",
+          "net_drop_in",
+          "net_drop_out",
+          "net_err_in",
+          "net_err_out",
+          "net_packets_sent",
+          "net_packets_recv"
+        ]
       },
       "netstat": {
         "measurement": [
-          "tcp_established",
-          "tcp_time_wait"
-        ],
-        "metrics_collection_interval": 60
+          "netstat_tcp_close",
+          "netstat_tcp_close_wait",
+          "netstat_tcp_closing",
+          "netstat_tcp_established",
+          "netstat_tcp_fin_wait1",
+          "netstat_tcp_fin_wait2",
+          "netstat_tcp_last_ack",
+          "netstat_tcp_listen",
+          "netstat_tcp_none",
+          "netstat_tcp_syn_recv",
+          "netstat_tcp_syn_sent",
+          "netstat_tcp_time_wait",
+          "udp_socket"
+        ]
       },
       "swap": {
         "measurement": [
+          "swap_used",
           "swap_used_percent"
-        ],
-        "metrics_collection_interval": 60
+        ]
       }
     }
   }
