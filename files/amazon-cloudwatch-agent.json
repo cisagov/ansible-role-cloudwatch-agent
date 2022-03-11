@@ -328,11 +328,11 @@
       },
       "ethtool": {
         "metrics_include": [
-          "ethtool_bw_in_allowance_exceeded",
-          "ethtool_bw_out_allowance_exceeded",
-          "ethtool_conntrack_allowance_exceeded",
-          "ethtool_linklocal_allowance_exceeded",
-          "ethtool_pps_allowance_exceeded"
+          "bw_in_allowance_exceeded",
+          "bw_out_allowance_exceeded",
+          "conntrack_allowance_exceeded",
+          "linklocal_allowance_exceeded",
+          "pps_allowance_exceeded"
         ]
       },
       "mem": {
