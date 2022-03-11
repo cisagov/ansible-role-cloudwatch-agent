@@ -21,6 +21,13 @@
       paths:
         - "{{ role_path }}/tasks"
 
+# Install ethtool, since we want to allow this agent to use it to
+# collect information from the ENA if present.
+- name: Install ethtool
+  ansible.builtin.package:
+    name:
+      - ethtool
+
 # Note that we are using a single config file for all instances,
 # regardless of Linux distribution.  This means that the config file
 # may well (and most likely does) reference log files that do not
