@@ -8,104 +8,104 @@
         "collect_list": [
           {
             "file_path": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "amazon-cloudwatch-agent",
             "timestamp_format": "%Y/%m/%d %H:%M:%S"
           },
           {
             "file_path": "/var/log/aide/aide.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "aide"
           },
           {
             "file_path": "/var/log/apt/history.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "apt/history",
             "multi_line_start_pattern": "Start-Date: {timestamp_format}",
             "timestamp_format": "%Y-%m-%d  %H:%M:%S"
           },
           {
             "file_path": "/var/log/dpkg.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "dpkg",
             "timestamp_format": "%Y-%m-%d %H:%M:%S"
           },
           {
             "file_path": "/var/log/clamav/freshclam.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "clamav/freshclam",
             "timestamp_format": "%a %b %d %H:%M:%S %Y"
           },
           {
             "file_path": "/var/log/freshclam.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "clamav/freshclam",
             "timestamp_format": "%a %b %d %H:%M:%S %Y"
           },
           {
             "file_path": "/var/log/clamav/lastscan.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "clamav/lastscan"
           },
           {
             "file_path": "/var/log/cloud-init.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "cloud-init",
             "timestamp_format": "%Y-%m-%d %H:%M:%S"
           },
           {
             "file_path": "/var/log/cloud-init-output.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "cloud-init-output"
           },
           {
             "file_path": "/var/log/ipaclient-install.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipaclient-install"
           },
           {
             "file_path": "/var/log/ipaclient-uninstall.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipaclient-uninstall"
           },
           {
             "file_path": "/var/log/ipaserver-install.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipaserver-install"
           },
           {
             "file_path": "/var/log/syslog",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "syslog",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/auth.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "auth",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/daemon.log",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "daemon",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/debug",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "debug",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/kern.log",
-            "log_group_name": "/instance-logs/{instance-id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "kern",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/messages",
-            "log_group_name": "/instance-logs/{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "messages",
             "timestamp_format": "%b %d %H:%M:%S"
           }
