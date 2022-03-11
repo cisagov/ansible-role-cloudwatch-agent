@@ -25,6 +25,12 @@
             "timestamp_format": "%Y-%m-%d  %H:%M:%S"
           },
           {
+            "file_path": "/var/log/auth.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "auth",
+            "timestamp_format": "%b %d %H:%M:%S"
+          },
+          {
             "file_path": "/var/log/dpkg.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "dpkg",
@@ -59,33 +65,6 @@
             "log_stream_name": "cloud-init-output"
           },
           {
-            "file_path": "/var/log/ipaclient-install.log",
-            "log_group_name": "/instance-logs/{local_hostname}",
-            "log_stream_name": "ipaclient-install"
-          },
-          {
-            "file_path": "/var/log/ipaclient-uninstall.log",
-            "log_group_name": "/instance-logs/{local_hostname}",
-            "log_stream_name": "ipaclient-uninstall"
-          },
-          {
-            "file_path": "/var/log/ipaserver-install.log",
-            "log_group_name": "/instance-logs/{local_hostname}",
-            "log_stream_name": "ipaserver-install"
-          },
-          {
-            "file_path": "/var/log/syslog",
-            "log_group_name": "/instance-logs/{local_hostname}",
-            "log_stream_name": "syslog",
-            "timestamp_format": "%b %d %H:%M:%S"
-          },
-          {
-            "file_path": "/var/log/auth.log",
-            "log_group_name": "/instance-logs/{local_hostname}",
-            "log_stream_name": "auth",
-            "timestamp_format": "%b %d %H:%M:%S"
-          },
-          {
             "file_path": "/var/log/daemon.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "daemon",
@@ -98,15 +77,179 @@
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
+            "file_path": "/var/log/dirsrv/slapd-*/access",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dirsrv/slapd/access",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
+          },
+          {
+            "file_path": "/var/log/dirsrv/slapd-*/audit",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dirsrv/slapd/audit",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
+          },
+          {
+            "file_path": "/var/log/dirsrv/slapd-*/errors",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dirsrv/slapd/errors",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
+          },
+          {
+            "file_path": "/var/log/dnf.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dnf",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/dnf.librepo.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dnf/librepo",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/dnf.rpm.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dnf/rpm",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/hawkey.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "hawkey",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/httpd/access_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "httpd/access"
+          },
+          {
+            "file_path": "/var/log/httpd/error_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "httpd/error",
+            "timestamp_format": "[%a %b %d %H:%M:%S.%f %Y]"
+          },
+          {
+            "file_path": "/var/log/httpd/ssl_request_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "httpd/ssl_request",
+            "timestamp_format": "[%d/%b/%Y:%H:%M:%S.%f %z]"
+          },
+          {
+            "file_path": "/var/log/ipa/cli.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipa/cli",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/ipa/ipactl.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipa/ipactl",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/ipa-custodia.audit.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipa-custodia/audit",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/ipaclient-install.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipaclient-install",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/ipaclient-uninstall.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipaclient-uninstall",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/ipareplica-conncheck.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipareplica-conncheck",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/ipareplica-install.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipareplica-install",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/ipaserver-install.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipaserver-install",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+          },
+          {
+            "file_path": "/var/log/kadmind.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "kadmind",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %d %H:%M:%S"
+          },
+          {
             "file_path": "/var/log/kern.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "kern",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
+            "file_path": "/var/log/krb5kdc.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "krb5kdc",
+            "timestamp_format": "%b %d %H:%M:%S"
+          },
+          {
             "file_path": "/var/log/messages",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "messages",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/secure",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "secure",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/sssd/ldap_child.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "sssd/ldap_child",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "(%Y-%m-%d %H:%M:%S):"
+          },
+          {
+            "file_path": "/var/log/sssd/sssd*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "sssd",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "(%Y-%m-%d %H:%M:%S):"
+          },
+          {
+            "file_path": "/var/log/sudo.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "sudo",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S : "
+          },
+          {
+            "file_path": "/var/log/syslog",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "syslog",
             "timestamp_format": "%b %d %H:%M:%S"
           }
         ]
