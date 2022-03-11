@@ -1,6 +1,6 @@
 ---
 - name: Load var file with package URL based on the OS type
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -11,7 +11,7 @@
         - "{{ role_path }}/vars"
 
 - name: Load tasks file with install tasks based on the OS type
-  include: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_tasks: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -33,7 +33,7 @@
 # may well (and most likely does) reference log files that do not
 # exist on all instances.
 - name: Copy over CloudWatch Agent configuration
-  copy:
+  ansible.builtin.copy:
     src: amazon-cloudwatch-agent.json
     dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
     mode: 0600
@@ -43,16 +43,16 @@
 # it here because it will be started again during the idempotence test
 # and therefore will fail idempotence.
 - name: Enable AWS CloudWatch Agent
-  service:
+  ansible.builtin.service:
     name: amazon-cloudwatch-agent
     enabled: yes
 
 - name: Install rsyslog
-  package:
+  ansible.builtin.package:
     name:
       - rsyslog
 - name: Enable rsyslog
-  service:
+  ansible.builtin.service:
     name: rsyslog
     enabled: yes
 
@@ -60,7 +60,7 @@
 # so that the Amazon CloudWatch Agent can in turn forward them to
 # CloudWatch.
 - name: Forward journald log entries to rsyslog
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/systemd/journald.conf
     regexp: '{{ item.regex }}'
     line: '{{ item.line }}'
