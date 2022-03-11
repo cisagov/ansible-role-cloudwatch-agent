@@ -34,9 +34,9 @@
 # exist on all instances.
 - name: Copy over CloudWatch Agent configuration
   ansible.builtin.copy:
-    src: amazon-cloudwatch-agent.json
     dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
     mode: 0600
+    src: amazon-cloudwatch-agent.json
 
 # The AWS CloudWatch Agent systemd unit kicks off a process that
 # starts the CloudWatch Agent and then dies.  Therefore we can't start
@@ -44,8 +44,8 @@
 # and therefore will fail idempotence.
 - name: Enable AWS CloudWatch Agent
   ansible.builtin.service:
-    name: amazon-cloudwatch-agent
     enabled: yes
+    name: amazon-cloudwatch-agent
 
 - name: Install rsyslog
   ansible.builtin.package:
@@ -53,20 +53,20 @@
       - rsyslog
 - name: Enable rsyslog
   ansible.builtin.service:
-    name: rsyslog
     enabled: yes
+    name: rsyslog
 
 # Configure systemd-journald to forward all journal logs to rsyslog,
 # so that the Amazon CloudWatch Agent can in turn forward them to
 # CloudWatch.
 - name: Forward journald log entries to rsyslog
   ansible.builtin.lineinfile:
-    path: /etc/systemd/journald.conf
-    regexp: '{{ item.regex }}'
-    line: '{{ item.line }}'
     # This forces lineinfile not to append the line if the regex fails
     # to match
     backrefs: yes
+    line: '{{ item.line }}'
+    path: /etc/systemd/journald.conf
+    regexp: '{{ item.regex }}'
   loop:
     - {regex: '^#?ForwardToSyslog', line: "ForwardToSyslog=yes"}
     - {regex: '^#?MaxLevelSyslog', line: "MaxLevelSyslog=debug"}
