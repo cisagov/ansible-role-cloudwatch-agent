@@ -7,10 +7,24 @@
       "files": {
         "collect_list": [
           {
+            "file_path": "/var/alternatives.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "alternatives",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "update-alternatives %Y-%m-%d %H:%M:%S"
+          },
+          {
             "file_path": "/var/log/amazon/amazon-cloudwatch-agent/amazon-cloudwatch-agent.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "amazon-cloudwatch-agent",
             "timestamp_format": "%Y/%m/%d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/amazon/ssm/*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "amazon-ssm-agent",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S"
           },
           {
             "file_path": "/var/log/aide/aide.log",
@@ -21,32 +35,26 @@
             "file_path": "/var/log/apt/history.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "apt/history",
-            "multi_line_start_pattern": "Start-Date: {timestamp_format}",
-            "timestamp_format": "%Y-%m-%d  %H:%M:%S"
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "Start-Date: %Y-%m-%d  %H:%M:%S"
           },
           {
             "file_path": "/var/log/auth.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "auth",
-            "timestamp_format": "%b %d %H:%M:%S"
-          },
-          {
-            "file_path": "/var/log/dpkg.log",
-            "log_group_name": "/instance-logs/{local_hostname}",
-            "log_stream_name": "dpkg",
-            "timestamp_format": "%Y-%m-%d %H:%M:%S"
+            "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/clamav/freshclam.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "clamav/freshclam",
-            "timestamp_format": "%a %b %d %H:%M:%S %Y"
+            "timestamp_format": "%a %b %-d %H:%M:%S %Y"
           },
           {
             "file_path": "/var/log/freshclam.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "clamav/freshclam",
-            "timestamp_format": "%a %b %d %H:%M:%S %Y"
+            "timestamp_format": "%a %b %-d %H:%M:%S %Y"
           },
           {
             "file_path": "/var/log/clamav/lastscan.log",
@@ -68,13 +76,13 @@
             "file_path": "/var/log/daemon.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "daemon",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/debug",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "debug",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/dirsrv/slapd-*/access",
@@ -114,6 +122,12 @@
             "log_stream_name": "dnf/rpm",
             "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/dpkg.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dpkg",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S"
           },
           {
             "file_path": "/var/log/hawkey.log",
@@ -205,7 +219,7 @@
             "file_path": "/var/log/kern.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "kern",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/krb5kdc.log",
@@ -250,7 +264,25 @@
             "file_path": "/var/log/syslog",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "syslog",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/ufw.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ufw",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/unattended-upgrades/*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "unattended-upgrades",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/user.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "user",
+            "timestamp_format": "%b %-d %H:%M:%S"
           }
         ]
       }
