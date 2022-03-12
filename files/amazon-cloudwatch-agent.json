@@ -359,6 +359,9 @@
         ]
       },
       "ethtool": {
+        "interface_exclude": [
+          "tun0"
+        ],
         "metrics_include": [
           "bw_in_allowance_exceeded",
           "bw_out_allowance_exceeded",
