@@ -300,6 +300,13 @@
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "user",
             "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/home/vnc/.vnc/*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "vnc",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%a %b %-d %H:%M:%S %Y"
           }
         ]
       }
