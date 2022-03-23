@@ -22,7 +22,9 @@
             "file_path": "/var/log/amazon/amazon-cloudwatch-agent/amazon-cloudwatch-agent.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "amazon-cloudwatch-agent",
-            "timestamp_format": "%Y/%m/%d %H:%M:%S"
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/amazon/ssm/*.log",
