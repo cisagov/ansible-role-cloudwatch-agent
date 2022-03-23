@@ -42,12 +42,14 @@
             "file_path": "/var/log/apache2/error_log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "apache2/error",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "[%a %b %d %H:%M:%S.%f %Y]"
           },
           {
             "file_path": "/var/log/apache2/ssl_request_log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "apache2/ssl_request",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "[%d/%b/%Y:%H:%M:%S.%f %z]"
           },
           {
@@ -61,18 +63,21 @@
             "file_path": "/var/log/auth.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "auth",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/clamav/freshclam.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "clamav/freshclam",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%a %b %-d %H:%M:%S %Y"
           },
           {
             "file_path": "/var/log/freshclam.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "clamav/freshclam",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%a %b %-d %H:%M:%S %Y"
           },
           {
@@ -96,30 +101,35 @@
             "file_path": "/var/log/daemon.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "daemon",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/debug",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "debug",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/dirsrv/slapd-*/access",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "dirsrv/slapd/access",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
           },
           {
             "file_path": "/var/log/dirsrv/slapd-*/audit",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "dirsrv/slapd/audit",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
           },
           {
             "file_path": "/var/log/dirsrv/slapd-*/errors",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "dirsrv/slapd/errors",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
           },
           {
@@ -147,12 +157,14 @@
             "file_path": "/var/log/dpkg.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "dpkg",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%Y-%m-%d %H:%M:%S"
           },
           {
             "file_path": "/var/log/hawkey.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "hawkey",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
           },
           {
@@ -164,12 +176,14 @@
             "file_path": "/var/log/httpd/error_log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "httpd/error",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "[%a %b %d %H:%M:%S.%f %Y]"
           },
           {
             "file_path": "/var/log/httpd/ssl_request_log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "httpd/ssl_request",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "[%d/%b/%Y:%H:%M:%S.%f %z]"
           },
           {
@@ -247,24 +261,28 @@
             "file_path": "/var/log/kern.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "kern",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/krb5kdc.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "krb5kdc",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/messages",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "messages",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/secure",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "secure",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
@@ -292,12 +310,14 @@
             "file_path": "/var/log/syslog",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "syslog",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/ufw.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ufw",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
@@ -311,6 +331,7 @@
             "file_path": "/var/log/user.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "user",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
