@@ -304,7 +304,8 @@
             "file_path": "/var/log/unattended-upgrades/*.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "unattended-upgrades",
-            "timestamp_format": "%b %-d %H:%M:%S"
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S,%f"
           },
           {
             "file_path": "/var/log/user.log",
