@@ -177,56 +177,64 @@
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipa/cli",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/ipa/ipactl.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipa/ipactl",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/ipa-custodia.audit.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipa-custodia/audit",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/ipaclient-install.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipaclient-install",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/ipaclient-uninstall.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipaclient-uninstall",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/ipareplica-conncheck.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipareplica-conncheck",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/ipareplica-install.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipareplica-install",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/ipaserver-install.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "ipaserver-install",
             "multi_line_start_pattern": "{timestamp_format}",
-            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ"
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
           },
           {
             "file_path": "/var/log/kadmind.log",
