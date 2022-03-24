@@ -1,12 +1,12 @@
 ---
 - name: Install xz-utils (required when using deb parameter of apt module)
-  package:
+  ansible.builtin.package:
     name:
       - xz-utils
 - name: Download the AWS CloudWatch Agent Debian package
-  get_url:
-    url: "{{ url }}"
+  ansible.builtin.get_url:
     dest: /tmp/amazon-cloudwatch-agent.deb
+    url: "{{ url }}"
 - name: Install AWS CloudWatch Agent Debian package
-  apt:
+  ansible.builtin.apt:
     deb: /tmp/amazon-cloudwatch-agent.deb

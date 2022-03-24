@@ -1,120 +1,365 @@
 {
   "agent": {
-    "metrics_collection_interval": 60,
-    "run_as_user": "root"
+    "metrics_collection_interval": 60
   },
   "logs": {
     "logs_collected": {
       "files": {
         "collect_list": [
           {
-            "file_path": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.logs",
-            "log_group_name": "/instance-logs/amazon-cloudwatch-agent",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%Y/%m/%d %H:%M:%S"
+            "file_path": "/var/log/aide/aide.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "aide"
           },
           {
-            "file_path": "/var/log/aide/aide.log",
-            "log_group_name": "/instance-logs/aide",
-            "log_stream_name": "{instance_id}"
+            "file_path": "/var/alternatives.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "alternatives",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "update-alternatives %Y-%m-%d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/amazon/amazon-cloudwatch-agent/amazon-cloudwatch-agent.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "amazon-cloudwatch-agent",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/amazon/ssm/*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "amazon-ssm-agent",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/apache2/access_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "apache2/access"
+          },
+          {
+            "file_path": "/var/log/apache2/error_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "apache2/error",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "[%a %b %d %H:%M:%S.%f %Y]"
+          },
+          {
+            "file_path": "/var/log/apache2/ssl_request_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "apache2/ssl_request",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "[%d/%b/%Y:%H:%M:%S.%f %z]"
           },
           {
             "file_path": "/var/log/apt/history.log",
-            "log_group_name": "/instance-logs/apt/history",
-            "log_stream_name": "{instance_id}",
-            "multi_line_start_pattern": "Start-Date: {timestamp_format}",
-            "timestamp_format": "%Y-%m-%d  %H:%M:%S"
-          },
-          {
-            "file_path": "/var/log/dpkg.log",
-            "log_group_name": "/instance-logs/dpkg",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%Y-%m-%d %H:%M:%S"
-          },
-          {
-            "file_path": "/var/log/clamav/freshclam.log",
-            "log_group_name": "/instance-logs/clamav/freshclam",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%a %b %d %H:%M:%S %Y"
-          },
-          {
-            "file_path": "/var/log/freshclam.log",
-            "log_group_name": "/instance-logs/clamav/freshclam",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%a %b %d %H:%M:%S %Y"
-          },
-          {
-            "file_path": "/var/log/clamav/lastscan.log",
-            "log_group_name": "/instance-logs/clamav/lastscan",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/cloud-init.log",
-            "log_group_name": "/instance-logs/cloud-init",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%Y-%m-%d %H:%M:%S"
-          },
-          {
-            "file_path": "/var/log/cloud-init-output.log",
-            "log_group_name": "/instance-logs/cloud-init-output",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/ipaclient-install.log",
-            "log_group_name": "/instance-logs/ipaclient-install",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/ipaclient-uninstall.log",
-            "log_group_name": "/instance-logs/ipaclient-uninstall",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/ipaserver-install.log",
-            "log_group_name": "/instance-logs/ipaserver-install",
-            "log_stream_name": "{instance_id}"
-          },
-          {
-            "file_path": "/var/log/syslog",
-            "log_group_name": "/instance-logs/syslog",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "apt/history",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "Start-Date: %Y-%m-%d  %H:%M:%S"
           },
           {
             "file_path": "/var/log/auth.log",
-            "log_group_name": "/instance-logs/auth",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "auth",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/clamav/freshclam.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "clamav/freshclam",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%a %b %-d %H:%M:%S %Y"
+          },
+          {
+            "file_path": "/var/log/freshclam.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "clamav/freshclam",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%a %b %-d %H:%M:%S %Y"
+          },
+          {
+            "file_path": "/var/log/clamav/lastscan.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "clamav/lastscan"
+          },
+          {
+            "file_path": "/var/log/cloud-init.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "cloud-init",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S,%f"
+          },
+          {
+            "file_path": "/var/log/cloud-init-output.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "cloud-init-output"
           },
           {
             "file_path": "/var/log/daemon.log",
-            "log_group_name": "/instance-logs/daemon",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "daemon",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
             "file_path": "/var/log/debug",
-            "log_group_name": "/instance-logs/debug",
-            "log_stream_name": "{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "debug",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/dirsrv/slapd-*/access",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dirsrv/slapd/access",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
+          },
+          {
+            "file_path": "/var/log/dirsrv/slapd-*/audit",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dirsrv/slapd/audit",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
+          },
+          {
+            "file_path": "/var/log/dirsrv/slapd-*/errors",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dirsrv/slapd/errors",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%d/%b/%Y:%H:%M:%S.%f %z"
+          },
+          {
+            "file_path": "/var/log/dnf.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dnf",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/dnf.librepo.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dnf/librepo",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/dnf.rpm.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dnf/rpm",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/dpkg.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "dpkg",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/hawkey.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "hawkey",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
+          },
+          {
+            "file_path": "/var/log/httpd/access_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "httpd/access"
+          },
+          {
+            "file_path": "/var/log/httpd/error_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "httpd/error",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "[%a %b %d %H:%M:%S.%f %Y]"
+          },
+          {
+            "file_path": "/var/log/httpd/ssl_request_log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "httpd/ssl_request",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "[%d/%b/%Y:%H:%M:%S.%f %z]"
+          },
+          {
+            "file_path": "/var/log/ipa/cli.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipa/cli",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/ipa/ipactl.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipa/ipactl",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/ipa-custodia.audit.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipa-custodia/audit",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/ipaclient-install.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipaclient-install",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/ipaclient-uninstall.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipaclient-uninstall",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/ipareplica-conncheck.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipareplica-conncheck",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/ipareplica-install.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipareplica-install",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/ipaserver-install.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ipaserver-install",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%dT%H:%M:%SZ",
+            "timezone": "UTC"
+          },
+          {
+            "file_path": "/var/log/kadmind.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "kadmind",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/kern.log",
-            "log_group_name": "/instance-logs/kern",
-            "log_stream_name": "{instance_id}",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "kern",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/krb5kdc.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "krb5kdc",
+            "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %d %H:%M:%S"
           },
           {
             "file_path": "/var/log/messages",
-            "log_group_name": "/instance-logs/messages",
-            "log_stream_name": "{instance_id}",
-            "timestamp_format": "%b %d %H:%M:%S"
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "messages",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/secure",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "secure",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/sssd/ldap_child.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "sssd/ldap_child",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "(%Y-%m-%d %H:%M:%S):"
+          },
+          {
+            "file_path": "/var/log/sssd/sssd*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "sssd",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "(%Y-%m-%d %H:%M:%S):"
+          },
+          {
+            "file_path": "/var/log/sudo.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "sudo",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S : "
+          },
+          {
+            "file_path": "/var/log/syslog",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "syslog",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/ufw.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "ufw",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/unattended-upgrades/*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "unattended-upgrades",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S,%f"
+          },
+          {
+            "file_path": "/var/log/user.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "user",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/home/vnc/.vnc/*.log",
+            "log_group_name": "/instance-logs/{local_hostname}",
+            "log_stream_name": "vnc",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%a %b %-d %H:%M:%S %Y"
           }
         ]
       }
     }
   },
   "metrics": {
+    "aggregation_dimensions": [
+      [
+        "AutoScalingGroupName"
+      ],
+      [
+        "ImageId"
+      ],
+      [
+        "InstanceId"
+      ],
+      [
+        "InstanceType"
+      ]
+    ],
     "append_dimensions": {
       "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
       "ImageId": "${aws:ImageId}",
@@ -124,58 +369,112 @@
     "metrics_collected": {
       "cpu": {
         "measurement": [
+          "cpu_usage_active",
+          "cpu_usage_guest",
+          "cpu_usage_guest_nice",
           "cpu_usage_idle",
           "cpu_usage_iowait",
-          "cpu_usage_user",
-          "cpu_usage_system"
+          "cpu_usage_irq",
+          "cpu_usage_nice",
+          "cpu_usage_softirq",
+          "cpu_usage_steal",
+          "cpu_usage_system",
+          "cpu_usage_user"
         ],
-        "metrics_collection_interval": 60,
         "resources": [
           "*"
-        ],
-        "totalcpu": false
+        ]
       },
       "disk": {
-        "measurement": [
-          "used_percent",
-          "inodes_free"
+        "ignore_file_system_types": [
+          "devtmpfs",
+          "sysfs",
+          "tmpfs"
         ],
-        "metrics_collection_interval": 60,
+        "measurement": [
+          "disk_total",
+          "disk_used",
+          "disk_used_percent"
+        ],
         "resources": [
           "*"
         ]
       },
       "diskio": {
         "measurement": [
-          "io_time",
-          "write_bytes",
-          "read_bytes",
-          "writes",
-          "reads"
+          "diskio_io_time",
+          "diskio_iops_in_progress",
+          "diskio_read_bytes",
+          "diskio_read_time",
+          "diskio_reads",
+          "diskio_write_bytes",
+          "diskio_write_time",
+          "diskio_writes"
         ],
-        "metrics_collection_interval": 60,
         "resources": [
           "*"
         ]
       },
+      "ethtool": {
+        "interface_exclude": [
+          "tun0"
+        ],
+        "metrics_include": [
+          "bw_in_allowance_exceeded",
+          "bw_out_allowance_exceeded",
+          "conntrack_allowance_exceeded",
+          "linklocal_allowance_exceeded",
+          "pps_allowance_exceeded"
+        ]
+      },
       "mem": {
         "measurement": [
+          "mem_active",
+          "mem_available",
+          "mem_available_percent",
+          "mem_buffered",
+          "mem_cached",
+          "mem_free",
+          "mem_inactive",
+          "mem_total",
+          "mem_used",
           "mem_used_percent"
-        ],
-        "metrics_collection_interval": 60
+        ]
+      },
+      "net": {
+        "measurement": [
+          "net_bytes_recv",
+          "net_bytes_sent",
+          "net_drop_in",
+          "net_drop_out",
+          "net_err_in",
+          "net_err_out",
+          "net_packets_sent",
+          "net_packets_recv"
+        ]
       },
       "netstat": {
         "measurement": [
-          "tcp_established",
-          "tcp_time_wait"
-        ],
-        "metrics_collection_interval": 60
+          "netstat_tcp_close",
+          "netstat_tcp_close_wait",
+          "netstat_tcp_closing",
+          "netstat_tcp_established",
+          "netstat_tcp_fin_wait1",
+          "netstat_tcp_fin_wait2",
+          "netstat_tcp_last_ack",
+          "netstat_tcp_listen",
+          "netstat_tcp_none",
+          "netstat_tcp_syn_recv",
+          "netstat_tcp_syn_sent",
+          "netstat_tcp_time_wait",
+          "udp_socket"
+        ]
       },
       "swap": {
         "measurement": [
+          "swap_used",
           "swap_used_percent"
-        ],
-        "metrics_collection_interval": 60
+        ]
       }
     }
   }
