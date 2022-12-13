@@ -104,7 +104,12 @@ jobs:
       matrix:
         scenario:
           - default
-    runs-on: ubuntu-latest
+    # TODO: We would prefer to run this job on ubuntu-latest, but
+    # Amazon Linux 2 has such an ancient version of SystemD (219) that
+    # it can't cope with cgroups v2.  We should revert to
+    # ubuntu-latest once cisagov/skeleton-ansible-role#131 is
+    # approved, merged, and pulled into this repo via Lineage.
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - id: setup-python
