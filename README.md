@@ -56,7 +56,7 @@ Here's how to use it in a playbook:
   tasks:
     - name: Install AWS CloudWatch agent
       ansible.builtin.include_role:
-        name: cloudwatch-agent
+        name: cloudwatch_agent
 ```
 
 ## Contributing ##
