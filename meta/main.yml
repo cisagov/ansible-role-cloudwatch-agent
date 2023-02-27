@@ -1,8 +1,9 @@
 ---
+dependencies: []
 galaxy_info:
   author: Shane Frasier
-  description: Install AWS CloudWatch Agent
   company: CISA Cyber Assessments
+  description: Install AWS CloudWatch Agent
   galaxy_tags:
     - agent
     - aws
@@ -30,7 +31,6 @@ galaxy_info:
         - bookworm
     - name: Fedora
       versions:
-        - "35"
         - "36"
         - "37"
     - name: Ubuntu
@@ -39,5 +39,3 @@ galaxy_info:
         - focal
         - jammy
   role_name: cloudwatch_agent
-
-dependencies: []
