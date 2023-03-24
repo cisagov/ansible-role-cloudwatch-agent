@@ -66,6 +66,12 @@
             "multi_line_start_pattern": "^type="
           },
           {
+            "file_path": "/var/log/audit/audit.log",
+            "log_group_name": "/instance-logs/audit",
+            "log_stream_name": "{local_hostname}",
+            "multi_line_start_pattern": "^type="
+          },
+          {
             "file_path": "/var/log/auth.log",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "auth",
@@ -285,9 +291,23 @@
             "timestamp_format": "%b %-d %H:%M:%S"
           },
           {
+            "file_path": "/var/log/messages",
+            "log_group_name": "/instance-logs/messages",
+            "log_stream_name": "{local_hostname}",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
             "file_path": "/var/log/secure",
             "log_group_name": "/instance-logs/{local_hostname}",
             "log_stream_name": "secure",
+            "multi_line_start_pattern": "{timestamp_format}",
+            "timestamp_format": "%b %-d %H:%M:%S"
+          },
+          {
+            "file_path": "/var/log/secure",
+            "log_group_name": "/instance-logs/secure",
+            "log_stream_name": "{local_hostname}",
             "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "%b %-d %H:%M:%S"
           },
