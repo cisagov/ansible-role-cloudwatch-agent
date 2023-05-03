@@ -1,5 +1,0 @@
----
-- name: Install AWS CloudWatch Agent RPM via yum
-  ansible.builtin.yum:
-    name:
-      - "{{ url }}"
