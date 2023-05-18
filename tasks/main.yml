@@ -38,6 +38,25 @@
     mode: 0600
     src: amazon-cloudwatch-agent.json
 
+# Modify AWS CloudWatch agent to start after cloud-init.  We sometimes
+# use cloud-init to set the hostname to the correct value, and
+# introducing this dependency ensures that this is allowed to happen
+# before the CloudWatch Agent starts up.
+#
+# See, for example, here:
+# https://github.com/cisagov/freeipa-server-tf-module/blob/a3b02be97d8f7c4cf44e80d3788d212344b320aa/cloud_init.tf#L23-L40
+- name: Ensure that CloudWatch Agent is started after cloud-init completes
+  block:
+    - name: Ensure that directory exists for CloudWatch Agent unit drop-in file
+      ansible.builtin.file:
+        path: /etc/systemd/system/amazon-cloudwatch-agent.service.d
+        recurse: true
+    - name: Copy drop-in file for CloudWatch Agent unit
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf
+        src: override.conf
+      notify: "systemd daemon-reload"
+
 # The AWS CloudWatch Agent systemd unit kicks off a process that
 # starts the CloudWatch Agent and then dies.  Therefore we can't start
 # it here because it will be started again during the idempotence test

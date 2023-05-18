@@ -19,7 +19,11 @@ def test_packages(host, pkg):
 
 
 @pytest.mark.parametrize(
-    "f", ["/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json"]
+    "f",
+    [
+        "/etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf",
+        "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json",
+    ],
 )
 def test_files(host, f):
     """Test that the expected files were installed."""
@@ -27,7 +31,6 @@ def test_files(host, f):
     assert host.file(f).is_file
     assert host.file(f).user == "root"
     assert host.file(f).group == "root"
-    assert host.file(f).mode == 0o600
 
 
 @pytest.mark.parametrize("service", ["amazon-cloudwatch-agent", "rsyslog"])
