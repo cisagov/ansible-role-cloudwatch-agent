@@ -13,13 +13,13 @@
   hosts: all
   tasks:
     - name: Group hosts by OS distribution
-      group_by:
+      ansible.builtin.group_by:
         key: os_{{ ansible_distribution }}
 - name: Wait for systemd to complete initialization (Fedora)
   hosts: os_Fedora
   tasks:
     - name: Wait for systemd to complete initialization # noqa 303
-      command: systemctl is-system-running
+      ansible.builtin.command: systemctl is-system-running
       register: systemctl_status
       until: "'running' in systemctl_status.stdout"
       retries: 30
