@@ -49,11 +49,13 @@
   block:
     - name: Ensure that directory exists for CloudWatch Agent unit drop-in file
       ansible.builtin.file:
+        mode: 0755
         path: /etc/systemd/system/amazon-cloudwatch-agent.service.d
-        recurse: true
+        state: directory
     - name: Copy drop-in file for CloudWatch Agent unit
       ansible.builtin.copy:
         dest: /etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf
+        mode: 0644
         src: override.conf
       notify: "systemd daemon-reload"
 
