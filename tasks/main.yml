@@ -32,11 +32,11 @@
 # regardless of Linux distribution.  This means that the config file
 # may well (and most likely does) reference log files that do not
 # exist on all instances.
-- name: Copy over CloudWatch Agent configuration
-  ansible.builtin.copy:
+- name: Create the CloudWatch Agent configuration
+  ansible.builtin.template:
     dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
     mode: 0600
-    src: amazon-cloudwatch-agent.json
+    src: amazon-cloudwatch-agent.json.j2
 
 # Modify AWS CloudWatch agent to start after cloud-init.  We sometimes
 # use cloud-init to set the hostname to the correct value, and
