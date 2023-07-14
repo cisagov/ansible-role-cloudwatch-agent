@@ -1,0 +1,2 @@
+---
+cloudwatch_agent_log_group_base_name: /instance-logs
