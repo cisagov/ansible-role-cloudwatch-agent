@@ -51,7 +51,7 @@ Here's how to use it in a playbook:
 
 ```yaml
 - hosts: ec2
-  become: yes
+  become: true
   become_method: sudo
   tasks:
     - name: Install AWS CloudWatch agent
