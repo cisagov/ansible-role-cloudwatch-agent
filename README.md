@@ -32,14 +32,9 @@ None.
 
 ## Role Variables ##
 
-None.
-
-<!--
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| optional_variable | Describe its purpose. | `default_value` | No |
-| required_variable | Describe its purpose. | n/a | Yes |
--->
+| cloudwatch_agent_log_group_base_name | The base name to use for all the log groups defined in the CloudWatch configuration file. Other values will be appended to the base name to create the final values as appropriate. | `/instance-logs` | No |
 
 ## Dependencies ##
 
