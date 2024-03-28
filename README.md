@@ -35,7 +35,7 @@ None.
 This role can be installed via the command:
 
 ```console
-ansible-galaxy ansible-galaxy install --role-file path/to/requirements.yml
+ansible-galaxy install --role-file path/to/requirements.yml
 ```
 
 where `requirements.yml` looks like:
