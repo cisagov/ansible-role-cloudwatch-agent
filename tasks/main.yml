@@ -65,7 +65,7 @@
 # and therefore will fail idempotence.
 - name: Enable AWS CloudWatch Agent
   ansible.builtin.service:
-    enabled: yes
+    enabled: true
     name: amazon-cloudwatch-agent
 
 - name: Install rsyslog
@@ -74,7 +74,7 @@
       - rsyslog
 - name: Enable rsyslog
   ansible.builtin.service:
-    enabled: yes
+    enabled: true
     name: rsyslog
 
 # Configure systemd-journald to forward all journal logs to rsyslog,
@@ -84,10 +84,10 @@
   ansible.builtin.lineinfile:
     # This forces lineinfile not to append the line if the regex fails
     # to match
-    backrefs: yes
-    line: '{{ item.line }}'
+    backrefs: true
+    line: "{{ item.line }}"
     path: /etc/systemd/journald.conf
-    regexp: '{{ item.regex }}'
+    regexp: "{{ item.regex }}"
   loop:
-    - {regex: '^#?ForwardToSyslog', line: "ForwardToSyslog=yes"}
-    - {regex: '^#?MaxLevelSyslog', line: "MaxLevelSyslog=debug"}
+    - {regex: "^#?ForwardToSyslog", line: "ForwardToSyslog=yes"}
+    - {regex: "^#?MaxLevelSyslog", line: "MaxLevelSyslog=debug"}
