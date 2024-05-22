@@ -68,14 +68,17 @@
     enabled: true
     name: amazon-cloudwatch-agent
 
-- name: Install rsyslog
-  ansible.builtin.package:
-    name:
-      - rsyslog
-- name: Enable rsyslog
-  ansible.builtin.service:
-    enabled: true
-    name: rsyslog
+- name: Install and enable rsyslog
+  block:
+    - name: Install rsyslog
+      ansible.builtin.package:
+        name:
+          - rsyslog
+
+    - name: Enable rsyslog
+      ansible.builtin.service:
+        enabled: true
+        name: rsyslog
 
 # Configure systemd-journald to forward all journal logs to rsyslog,
 # so that the Amazon CloudWatch Agent can in turn forward them to
