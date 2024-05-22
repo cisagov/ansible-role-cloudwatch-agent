@@ -1,6 +1,7 @@
 """Module containing the tests for the default scenario."""
 
 # Standard Python Libraries
+import configparser
 import os
 
 # Third-Party Libraries
@@ -40,10 +41,10 @@ def test_services(host, service):
 
 
 def test_systemd_journald_config(host):
-    """Test that the journald config was altered as expected."""
-    f = host.file("/etc/systemd/journald.conf")
-    assert f.exists
-    assert f.is_file
-    assert f.contains(r"^ForwardToSyslog=yes")
-    assert not f.contains(r"^ForwardToSyslog=no")
-    assert f.contains(r"^MaxLevelSyslog=debug")
+    """Test that systemd-journald is configured as expected."""
+    cmd = host.run("systemd-analyze cat-config systemd/journald.conf")
+    assert cmd.rc == 0
+    config = configparser.ConfigParser(strict=False)
+    config.read_string(cmd.stdout)
+    assert config["Journal"]["ForwardToSyslog"]
+    assert config["Journal"]["MaxLevelSyslog"] == "debug"
