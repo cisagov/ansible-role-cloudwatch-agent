@@ -1,12 +1,9 @@
 ---
 # When installing packages during later steps, the Fedora Docker
-# images we are using (geerlingguy/docker-fedora32-ansible:latest and
-# cisagov/docker-fedora33-ansible:latest) can throw sporadic errors
-# like:
+# images we are using can throw sporadic errors like: "No such file or
+# directory: '/var/cache/dnf/metadata_lock.pid'".
 #
-# No such file or directory: '/var/cache/dnf/metadata_lock.pid'
-#
-# Our fix is to ensure that systemd finishes initializing before
+# The fix is to ensure that systemd finishes initializing before
 # continuing on to the converge tasks.  For details see:
 # https://www.jeffgeerling.com/blog/2020/resolving-fedora-dnf-error-no-such-file-or-directory-varlibdnfrpmdblockpid
 - name: Group hosts by OS distribution
@@ -24,12 +21,18 @@
     # next line.
     - name: Wait for systemd to complete initialization # noqa command-instead-of-module
       ansible.builtin.command: systemctl is-system-running
-      register: systemctl_status
-      until: "'running' in systemctl_status.stdout"
-      retries: 30
-      delay: 5
-      when: ansible_service_mgr == "systemd"
       changed_when: false
+      delay: 5
+      # The systemctl is-system-running command can return a nonzero
+      # value if the status is degraded:
+      # https://man.archlinux.org/man/systemctl.1#System_Commands
+      failed_when: false
+      retries: 30
+      register: systemctl_status
+      until: >
+        'running' in systemctl_status.stdout or
+        'degraded' in systemctl_status.stdout
+      when: ansible_service_mgr == "systemd"
 
 - name: Import upgrade playbook
   ansible.builtin.import_playbook: upgrade.yml
