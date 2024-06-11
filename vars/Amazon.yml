@@ -1,5 +1,3 @@
 ---
-# vars file for Amazon Linux
-
 # The Amazon CloudWatch Agent URL
-url: https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm
+url: https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }}/latest/amazon-cloudwatch-agent.rpm
