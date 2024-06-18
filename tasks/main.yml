@@ -112,7 +112,9 @@
         section: Journal
         value: "{{ item.value }}"
       loop:
-        - {option: ForwardToSyslog, value: true}
-        - {option: MaxLevelSyslog, value: debug}
+        - option: ForwardToSyslog
+          value: true
+        - option: MaxLevelSyslog
+          value: debug
       notify:
         - Restart systemd-journald
