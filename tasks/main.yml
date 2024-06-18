@@ -52,6 +52,7 @@
         mode: 0755
         path: /etc/systemd/system/amazon-cloudwatch-agent.service.d
         state: directory
+
     - name: Copy drop-in file for CloudWatch Agent unit
       ansible.builtin.copy:
         dest: /etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf
