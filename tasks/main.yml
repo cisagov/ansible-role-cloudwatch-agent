@@ -52,42 +52,73 @@
         mode: 0755
         path: /etc/systemd/system/amazon-cloudwatch-agent.service.d
         state: directory
+
     - name: Copy drop-in file for CloudWatch Agent unit
       ansible.builtin.copy:
         dest: /etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf
         mode: 0644
         src: override.conf
-      notify: "systemd daemon-reload"
+      register: copy_dropin_file
 
 # The AWS CloudWatch Agent systemd unit kicks off a process that
 # starts the CloudWatch Agent and then dies.  Therefore we can't start
 # it here because it will be started again during the idempotence test
 # and therefore will fail idempotence.
 - name: Enable AWS CloudWatch Agent
-  ansible.builtin.service:
+  ansible.builtin.systemd_service:
+    # There is no need to perform a daemon-reload unless the config
+    # has changed.
+    daemon_reload: "{{ copy_dropin_file.changed }}"
     enabled: true
     name: amazon-cloudwatch-agent
 
-- name: Install rsyslog
-  ansible.builtin.package:
-    name:
-      - rsyslog
-- name: Enable rsyslog
-  ansible.builtin.service:
-    enabled: true
-    name: rsyslog
+- name: Install and enable rsyslog
+  block:
+    - name: Install rsyslog
+      ansible.builtin.package:
+        name:
+          - rsyslog
+
+    - name: Enable rsyslog
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+        enabled: true
+        name: rsyslog
 
 # Configure systemd-journald to forward all journal logs to rsyslog,
 # so that the Amazon CloudWatch Agent can in turn forward them to
 # CloudWatch.
-- name: Forward journald log entries to rsyslog
-  ansible.builtin.lineinfile:
-    # This forces lineinfile not to append the line if the regex fails
-    # to match
-    backrefs: true
-    line: "{{ item.line }}"
-    path: /etc/systemd/journald.conf
-    regexp: "{{ item.regex }}"
-  loop:
-    - {regex: "^#?ForwardToSyslog", line: "ForwardToSyslog=yes"}
-    - {regex: "^#?MaxLevelSyslog", line: "MaxLevelSyslog=debug"}
+- name: Configure systemd-journald to forward log entries to rsyslog
+  block:
+    - name: >-
+        Ensure that the directory where the systemd-journald drop-in
+        will live actually exists
+      ansible.builtin.file:
+        group: root
+        mode: 0755
+        owner: root
+        path: /etc/systemd/journald.conf.d
+        state: directory
+
+    - name: >-
+        Configure systemd-journald to forward log entries to rsyslog
+      community.general.ini_file:
+        group: root
+        mode: 0644
+        # This is just to maintain the look and feel of the
+        # /etc/systemd/journald.conf file as provided by
+        # systemd-journald.
+        no_extra_spaces: true
+        option: "{{ item.option }}"
+        owner: root
+        path: >-
+          /etc/systemd/journald.conf.d/99-ansible-role-cloudwatch-agent.conf
+        section: Journal
+        value: "{{ item.value }}"
+      loop:
+        - option: ForwardToSyslog
+          value: true
+        - option: MaxLevelSyslog
+          value: debug
+      notify:
+        - Restart systemd-journald

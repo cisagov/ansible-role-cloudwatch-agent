@@ -180,6 +180,16 @@ jobs:
         architecture:
           - amd64
           - arm64
+        exclude:
+          # TODO: systemd-journald.socket fails to start under QEMU
+          # emulation starting with systemd version 256, so starting
+          # with that version the systemd-journald service cannot be
+          # restarted either.  Right now we support this case, but we
+          # can't test it until we have native ARM64 runners.
+          #
+          # See issue #61 for more details.
+          - architecture: arm64
+            platform: debian13-systemd
         platform:
           - amazonlinux2023-systemd
           - debian10-systemd

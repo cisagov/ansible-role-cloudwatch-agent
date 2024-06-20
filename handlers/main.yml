@@ -1,5 +1,5 @@
 ---
-- name: SystemD daemon-reload
-  ansible.builtin.systemd:
-    daemon_reload: true
-  listen: "systemd daemon-reload"
+- name: Restart systemd-journald
+  ansible.builtin.service:
+    name: systemd-journald.service
+    state: restarted
