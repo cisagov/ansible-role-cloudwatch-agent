@@ -35,8 +35,8 @@ updates:
       # Managed by cisagov/skeleton-ansible-role
       - dependency-name: ansible
       - dependency-name: ansible-core
-    #   - dependency-name: molecule
-    #   - dependency-name: pytest-testinfra
+      - dependency-name: molecule
+      - dependency-name: pytest-testinfra
     package-ecosystem: pip
     schedule:
       interval: weekly
