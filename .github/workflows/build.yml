@@ -194,6 +194,10 @@ jobs:
           # See issue #61 for more details.
           - architecture: arm64
             platform: debian13-systemd
+          - architecture: arm64
+            platform: fedora41-systemd
+          - architecture: arm64
+            platform: kali-systemd
         platform:
           - amazonlinux2023-systemd
           - debian10-systemd
