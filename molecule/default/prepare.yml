@@ -15,10 +15,10 @@
 - name: Wait for systemd to complete initialization (Fedora)
   hosts: os_Fedora
   tasks:
-    # ansible-lint wants us to use the ansible.builtin.systemd module
-    # here, but that module does not provide the is-system-running
-    # functionality.  This is the reason for the noqa comment on the
-    # next line.
+    # ansible-lint wants us to use the ansible.builtin.systemd_service
+    # module here, but that module does not provide the
+    # is-system-running functionality.  This is the reason for the
+    # noqa comment on the next line.
     - name: Wait for systemd to complete initialization # noqa command-instead-of-module
       ansible.builtin.command: systemctl is-system-running
       changed_when: false
@@ -26,6 +26,10 @@
       # The systemctl is-system-running command can return a nonzero
       # value if the status is degraded:
       # https://man.archlinux.org/man/systemctl.1#System_Commands
+      #
+      # This often happens when running ARM64 containers under qemu,
+      # as some services (particularly systemd services) use kernel
+      # calls that qemu can't emulate.
       failed_when: false
       retries: 30
       register: systemctl_status
