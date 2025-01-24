@@ -85,22 +85,15 @@ platforms:
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
-  # TODO: systemd-journald.socket fails to start under QEMU emulation
-  # starting with systemd version 256, so starting with that version
-  # the systemd-journald service cannot be restarted either.  Right
-  # now we support this case, but we can't test it until we have
-  # native ARM64 runners.
-  #
-  # See issue #61 for more details.
-  # - cgroupns_mode: host
-  #   command: /lib/systemd/systemd
-  #   image: docker.io/cisagov/docker-debian13-ansible:latest
-  #   name: debian13-systemd-arm64
-  #   platform: arm64
-  #   pre_build_image: true
-  #   privileged: true
-  #   volumes:
-  #     - /sys/fs/cgroup:/sys/fs/cgroup:rw
+  - cgroupns_mode: host
+    command: /lib/systemd/systemd
+    image: docker.io/cisagov/docker-debian13-ansible:latest
+    name: debian13-systemd-arm64
+    platform: arm64
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
   - cgroupns_mode: host
     command: /lib/systemd/systemd
     image: docker.io/cisagov/docker-kali-ansible:latest
