@@ -35,7 +35,7 @@
 - name: Create the CloudWatch Agent configuration
   ansible.builtin.template:
     dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
-    mode: 0600
+    mode: u=rw,g=,o=
     src: amazon-cloudwatch-agent.json.j2
 
 # Modify AWS CloudWatch agent to start after cloud-init.  We sometimes
@@ -49,14 +49,14 @@
   block:
     - name: Ensure that directory exists for CloudWatch Agent unit drop-in file
       ansible.builtin.file:
-        mode: 0755
+        mode: u=rwx,g=rx,o=rx
         path: /etc/systemd/system/amazon-cloudwatch-agent.service.d
         state: directory
 
     - name: Copy drop-in file for CloudWatch Agent unit
       ansible.builtin.copy:
         dest: /etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf
-        mode: 0644
+        mode: u=rw,g=r,o=r
         src: override.conf
       register: copy_dropin_file
 
@@ -95,7 +95,7 @@
         will live actually exists
       ansible.builtin.file:
         group: root
-        mode: 0755
+        mode: u=rwx,g=rx,o=rx
         owner: root
         path: /etc/systemd/journald.conf.d
         state: directory
@@ -104,7 +104,7 @@
         Configure systemd-journald to forward log entries to rsyslog
       community.general.ini_file:
         group: root
-        mode: 0644
+        mode: u=rw,g=r,o=r
         # This is just to maintain the look and feel of the
         # /etc/systemd/journald.conf file as provided by
         # systemd-journald.
