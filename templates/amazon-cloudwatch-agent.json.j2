@@ -34,19 +34,19 @@
             "timestamp_format": "%Y-%m-%d %H:%M:%S"
           },
           {
-            "file_path": "/var/log/apache2/access_log",
+            "file_path": "/var/log/apache2/access?log",
             "log_group_name": "{{ cloudwatch_agent_log_group_base_name }}/{local_hostname}",
             "log_stream_name": "apache2/access"
           },
           {
-            "file_path": "/var/log/apache2/error_log",
+            "file_path": "/var/log/apache2/error?log",
             "log_group_name": "{{ cloudwatch_agent_log_group_base_name }}/{local_hostname}",
             "log_stream_name": "apache2/error",
             "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "[%a %b %d %H:%M:%S.%f %Y]"
           },
           {
-            "file_path": "/var/log/apache2/ssl_request_log",
+            "file_path": "/var/log/apache2/ssl_request?log",
             "log_group_name": "{{ cloudwatch_agent_log_group_base_name }}/{local_hostname}",
             "log_stream_name": "apache2/ssl_request",
             "multi_line_start_pattern": "{timestamp_format}",
@@ -180,19 +180,19 @@
             "timestamp_format": "%Y-%m-%dT%H:%M:%S%z"
           },
           {
-            "file_path": "/var/log/httpd/access_log",
+            "file_path": "/var/log/httpd/access?log",
             "log_group_name": "{{ cloudwatch_agent_log_group_base_name }}/{local_hostname}",
             "log_stream_name": "httpd/access"
           },
           {
-            "file_path": "/var/log/httpd/error_log",
+            "file_path": "/var/log/httpd/error?log",
             "log_group_name": "{{ cloudwatch_agent_log_group_base_name }}/{local_hostname}",
             "log_stream_name": "httpd/error",
             "multi_line_start_pattern": "{timestamp_format}",
             "timestamp_format": "[%a %b %d %H:%M:%S.%f %Y]"
           },
           {
-            "file_path": "/var/log/httpd/ssl_request_log",
+            "file_path": "/var/log/httpd/ssl_request?log",
             "log_group_name": "{{ cloudwatch_agent_log_group_base_name }}/{local_hostname}",
             "log_stream_name": "httpd/ssl_request",
             "multi_line_start_pattern": "{timestamp_format}",
