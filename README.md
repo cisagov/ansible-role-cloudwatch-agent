@@ -10,20 +10,20 @@ systemd service.
 
 Note that for an EC2 instance to successfully run the CloudWatch
 Agent, it must be started with an instance role that includes the
-"CloudWatchAgentServerPolicy" policy.  See
-[here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/create-iam-roles-for-cloudwatch-agent.html)
+"CloudWatchAgentServerPolicy" policy.  See the
+[AWS CloudWatch documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/create-iam-roles-for-cloudwatch-agent.html)
 for more details.
 
-See
-[here](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html)
+See the
+[AWS CloudWatch documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html)
 for details on configuring the Amazon CloudWatch Agent.
 
 Note that this Ansible role makes use of the [`json_patch` Ansible
 module](https://github.com/ParticleDecay/ansible-jsonpatch), which is
 proposed for inclusion into the main Ansible project.  (For more
-information about what JSON Patch is, see
-[here](http://jsonpatch.com/).)  A copy of the relevant piece of
-Python code from that repository is included in the `library`
+information about what JSON Patch is, see the
+[documentation](http://jsonpatch.com/).)  A copy of the relevant piece
+of Python code from that repository is included in the `library`
 directory, so there is no extra action required by the user.
 
 ## Requirements ##
