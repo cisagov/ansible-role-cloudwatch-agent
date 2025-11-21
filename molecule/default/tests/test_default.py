@@ -23,7 +23,10 @@ def test_packages(host, pkg):
     "f",
     [
         "/etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf",
+        "/etc/systemd/system/upgrade-cloudwatch-agent.service",
+        "/etc/systemd/system/upgrade-cloudwatch-agent.timer",
         "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json",
+        "/usr/local/sbin/upgrade-cloudwatch-agent.sh",
     ],
 )
 def test_files(host, f):
@@ -34,7 +37,9 @@ def test_files(host, f):
     assert host.file(f).group == "root"
 
 
-@pytest.mark.parametrize("service", ["amazon-cloudwatch-agent", "rsyslog"])
+@pytest.mark.parametrize(
+    "service", ["amazon-cloudwatch-agent", "rsyslog", "upgrade-cloudwatch-agent.timer"]
+)
 def test_services(host, service):
     """Test that the expected services were enabled."""
     assert host.service(service).is_enabled
