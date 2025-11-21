@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Usage:
 #   upgrade-cloudwatch-agent.sh <rpm_url>
