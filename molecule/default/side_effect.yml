@@ -1,0 +1,8 @@
+---
+- name: Start systemd service to update CloudWatch agent
+  hosts: all
+  tasks:
+    - name: Start systemd service to update CloudWatch agent
+      ansible.builtin.systemd_service:
+        name: upgrade-cloudwatch-agent.service
+        state: restarted
