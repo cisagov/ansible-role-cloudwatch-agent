@@ -32,5 +32,6 @@ else
   pkg_file=/tmp/amazon-cloudwatch-agent.deb
 
   wget --output-document "$pkg_file" "$url"
-  apt install --assumeyes "$pkg_file"
+  apt install --assume-yes "$pkg_file"
+  rm "$pkg_file"
 fi
