@@ -40,7 +40,7 @@ def test_files(host, f):
 @pytest.mark.parametrize(
     "service", ["amazon-cloudwatch-agent", "rsyslog", "upgrade-cloudwatch-agent.timer"]
 )
-def test_services(host, service):
+def test_services_enabled(host, service):
     """Test that the expected services were enabled."""
     assert host.service(service).is_enabled
 
@@ -53,3 +53,18 @@ def test_systemd_journald_config(host):
     config.read_string(cmd.stdout)
     assert config["Journal"]["ForwardToSyslog"]
     assert config["Journal"]["MaxLevelSyslog"] == "debug"
+
+
+@pytest.mark.parametrize(
+    # This service is forced to run in the Molecule side_effect.yml
+    # playbook.
+    "service",
+    ["upgrade-cloudwatch-agent"],
+)
+def test_services_not_failed(host, service):
+    """Test that the expected services have not failed."""
+    cmd_str = f"systemctl is_failed {service}"
+    cmd = host.run(cmd_str)
+    print(cmd.stderr)
+    print(cmd.stdout)
+    assert cmd.failed, f"Command {cmd_str} should have failed"
