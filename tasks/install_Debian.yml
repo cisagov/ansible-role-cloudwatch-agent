@@ -13,3 +13,11 @@
 - name: Install AWS CloudWatch Agent Debian package
   ansible.builtin.apt:
     deb: /tmp/amazon-cloudwatch-agent.deb
+
+# Note that the corresponding systemd service and timer are copied
+# over in main.yml.
+- name: Install shell script to attempt to upgrade CloudWatch Agent
+  ansible.builtin.copy:
+    dest: /usr/local/sbin/upgrade-cloudwatch-agent.sh
+    mode: u=rx,g=,o=
+    src: upgrade-cloudwatch-agent-deb.sh
