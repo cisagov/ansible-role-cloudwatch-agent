@@ -30,5 +30,7 @@ if [ $# -ne 1 ]; then
 else
   url=${1}
 
-  dnf5 install --assumeyes "$url"
+  # All RedHat platforms should have a dnf executable that is
+  # symlinked to the latest version of dnf, e.g., dnf5.
+  dnf install --assumeyes "$url"
 fi
