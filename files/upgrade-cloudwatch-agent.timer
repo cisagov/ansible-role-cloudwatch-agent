@@ -1,0 +1,9 @@
+[Unit]
+Description=Attempt to upgrade the Amazon CloudWatch Agent at a daily cadence.
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

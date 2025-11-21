@@ -1,0 +1,9 @@
+[Unit]
+Description=Attempt to upgrade the Amazon CloudWatch Agent.
+
+[Service]
+ExecStart=/usr/local/sbin/upgrade-cloudwatch-agent.sh "{{ url }}"
+# TODO: There are other sandboxing-related directives that could
+# easily be added here.  See #75 for more details.
+PrivateTmp=true
+Type=oneshot
