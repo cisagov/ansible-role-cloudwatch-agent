@@ -4,6 +4,9 @@ Description=Attempt to upgrade the Amazon CloudWatch Agent at a daily cadence.
 [Timer]
 OnCalendar=daily
 Persistent=true
+# We don't want every instance with CloudWatch agent installed to
+# attempt to update at the same time.
+RandomizedDelaySec=2h
 
 [Install]
 WantedBy=timers.target
