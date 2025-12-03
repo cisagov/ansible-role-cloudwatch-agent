@@ -63,7 +63,7 @@ def test_systemd_journald_config(host):
 )
 def test_services_not_failed(host, service):
     """Test that the expected services have not failed."""
-    cmd_str = f"systemctl is_failed {service}"
+    cmd_str = f"systemctl is-failed {service}"
     cmd = host.run(cmd_str)
     print(cmd.stderr)
     print(cmd.stdout)
