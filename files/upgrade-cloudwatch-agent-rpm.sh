@@ -32,5 +32,10 @@ else
 
   # All RedHat platforms should have a dnf executable that is
   # symlinked to the latest version of dnf, e.g., dnf5.
-  dnf install --assumeyes "$url"
+  if ! output=$(dnf install --assumeyes "$url" 2>&1); then
+    echo "ERROR: Failed to install RPM from URL: $url" >&2
+    echo "dnf output:" >&2
+    echo "$output" >&2
+    exit 2
+  fi
 fi

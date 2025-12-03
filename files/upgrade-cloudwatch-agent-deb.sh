@@ -31,7 +31,14 @@ else
   url=${1}
   pkg_file=/tmp/amazon-cloudwatch-agent.deb
 
-  wget --output-document "$pkg_file" "$url"
+  wget_output=$(wget --output-document "$pkg_file" "$url" 2>&1)
+  wget_exit_code=$?
+  if [ $wget_exit_code -ne 0 ]; then
+    echo "ERROR: Failed to download package from $url"
+    echo "wget output:"
+    echo "$wget_output"
+    exit $wget_exit_code
+  fi
   apt install --assume-yes "$pkg_file"
   rm "$pkg_file"
 fi
