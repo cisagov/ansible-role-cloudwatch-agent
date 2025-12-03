@@ -29,7 +29,7 @@ if [ $# -ne 1 ]; then
   usage
 else
   url=${1}
-  pkg_file=/tmp/amazon-cloudwatch-agent.deb
+  pkg_file=$(mktemp).deb
 
   wget_output=$(wget --output-document "$pkg_file" "$url" 2>&1)
   wget_exit_code=$?
