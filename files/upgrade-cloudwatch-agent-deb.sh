@@ -22,7 +22,8 @@ Usage:
 Attempt to upgrade the Amazon CloudWatch Agent.  If the package
 pointed to is not an update then nothing is changed.
 
-The DEB URL must point to a DEB package (*.deb file).
+The DEB URL must point to a DEB package (*.deb file) and must be a
+secure (HTTPS) URL.
 HELP
   exit 1
 }
@@ -39,7 +40,13 @@ if [ $# -ne 1 ]; then
 else
   url=${1}
 
-  wget_output=$(wget --output-document "$PKG_FILE" "$url" 2>&1)
+  # Ensure that the URL is secure (HTTPS)
+  if [[ "$url" != https://* ]]; then
+    echo "Error: Only HTTPS URLs are allowed for security reasons"
+    exit 2
+  fi
+
+  wget_output=$(wget --https-only --output-document "$PKG_FILE" "$url" 2>&1)
   wget_exit_code=$?
   if [ $wget_exit_code -ne 0 ]; then
     echo "ERROR: Failed to download package from $url"

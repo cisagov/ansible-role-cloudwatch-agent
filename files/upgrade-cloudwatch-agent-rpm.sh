@@ -20,7 +20,8 @@ Usage:
 Attempt to upgrade the Amazon CloudWatch Agent.  If the package
 pointed to is not an update then nothing is changed.
 
-The RPM URL must point to an RPM package (*.rpm file).
+The RPM URL must point to an RPM package (*.rpm file) and must be a
+secure (HTTPS) URL.
 HELP
   exit 1
 }
@@ -29,6 +30,12 @@ if [ $# -ne 1 ]; then
   usage
 else
   url=${1}
+
+  # Ensure that the URL is secure (HTTPS)
+  if [[ "$url" != https://* ]]; then
+    echo "Error: Only HTTPS URLs are allowed for security reasons"
+    exit 2
+  fi
 
   # All RedHat platforms should have a dnf executable that is
   # symlinked to the latest version of dnf, e.g., dnf5.
