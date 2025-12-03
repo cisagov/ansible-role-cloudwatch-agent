@@ -12,6 +12,8 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
+PKG_FILE=$(mktemp).deb
+
 function usage {
   cat << HELP
 Usage:
@@ -25,13 +27,19 @@ HELP
   exit 1
 }
 
+# Delete temporary files
+function cleanup {
+  rm --force "$PKG_FILE"
+}
+
+trap cleanup EXIT
+
 if [ $# -ne 1 ]; then
   usage
 else
   url=${1}
-  pkg_file=$(mktemp).deb
 
-  wget_output=$(wget --output-document "$pkg_file" "$url" 2>&1)
+  wget_output=$(wget --output-document "$PKG_FILE" "$url" 2>&1)
   wget_exit_code=$?
   if [ $wget_exit_code -ne 0 ]; then
     echo "ERROR: Failed to download package from $url"
@@ -39,6 +47,5 @@ else
     echo "$wget_output"
     exit $wget_exit_code
   fi
-  apt install --assume-yes "$pkg_file"
-  rm "$pkg_file"
+  apt install --assume-yes "$PKG_FILE"
 fi
