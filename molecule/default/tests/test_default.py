@@ -23,7 +23,10 @@ def test_packages(host, pkg):
     "f",
     [
         "/etc/systemd/system/amazon-cloudwatch-agent.service.d/override.conf",
+        "/etc/systemd/system/upgrade-cloudwatch-agent.service",
+        "/etc/systemd/system/upgrade-cloudwatch-agent.timer",
         "/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json",
+        "/usr/local/sbin/upgrade-cloudwatch-agent.sh",
     ],
 )
 def test_files(host, f):
@@ -34,8 +37,10 @@ def test_files(host, f):
     assert host.file(f).group == "root"
 
 
-@pytest.mark.parametrize("service", ["amazon-cloudwatch-agent", "rsyslog"])
-def test_services(host, service):
+@pytest.mark.parametrize(
+    "service", ["amazon-cloudwatch-agent", "rsyslog", "upgrade-cloudwatch-agent.timer"]
+)
+def test_services_enabled(host, service):
     """Test that the expected services were enabled."""
     assert host.service(service).is_enabled
 
@@ -48,3 +53,24 @@ def test_systemd_journald_config(host):
     config.read_string(cmd.stdout)
     assert config["Journal"]["ForwardToSyslog"]
     assert config["Journal"]["MaxLevelSyslog"] == "debug"
+
+
+@pytest.mark.parametrize(
+    # This service is forced to run in the Molecule side_effect.yml
+    # playbook.
+    "service",
+    ["upgrade-cloudwatch-agent"],
+)
+def test_services_not_failed(host, service):
+    """Test that the expected services have not failed."""
+    cmd_str = f"systemctl is-failed {service}"
+    cmd = host.run(cmd_str)
+    assert (
+        cmd.failed
+    ), f"Command {cmd_str} did not fail, which indicates that the service {service} failed."
+
+    cmd_str = f"systemctl is-active {service}"
+    cmd = host.run(cmd_str)
+    assert (
+        cmd.succeeded
+    ), f"Command {cmd_str} failed, which indicates that the service {service} is no longer active."

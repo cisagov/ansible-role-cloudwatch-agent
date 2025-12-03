@@ -122,3 +122,38 @@
           value: debug
       notify:
         - Restart systemd-journald
+
+# Note that the corresponding shell script is copied over in the
+# OS-specific tasks file.
+- name: >-
+    Install and enable a systemd timer and install a systemd service
+    to attempt to upgrade CloudWatch Agent at a daily cadence
+  block:
+    - name: >-
+        Install systemd service to attempt to upgrade CloudWatch Agent
+      ansible.builtin.template:
+        dest: /etc/systemd/system/upgrade-cloudwatch-agent.service
+        mode: u=rw,g=r,o=r
+        src: upgrade-cloudwatch-agent.j2.service
+        # I'd like to validate the file here, but that can't be done
+        # cleanly.  See ansible/ansible#19243.
+        # validate: systemd-analyze verify %s
+
+    - name: >-
+        Install systemd timer to attempt to upgrade CloudWatch Agent
+        at a daily cadence
+      ansible.builtin.copy:
+        dest: /etc/systemd/system
+        mode: u=rw,g=r,o=r
+        src: upgrade-cloudwatch-agent.timer
+        # I'd like to validate the file here, but that can't be done
+        # cleanly.  See ansible/ansible#19243.
+        # validate: systemd-analyze verify %s
+
+    - name: >-
+        Enable systemd timer to attempt to upgrade CloudWatch Agent at
+        a daily cadence
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+        enabled: true
+        name: upgrade-cloudwatch-agent.timer

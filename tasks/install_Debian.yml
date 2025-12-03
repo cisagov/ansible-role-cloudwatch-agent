@@ -1,7 +1,10 @@
 ---
-- name: Install xz-utils (required when using deb parameter of apt module)
+- name: Install prerequisites
   ansible.builtin.package:
     name:
+      # Prerequisite of shell script installed below
+      - wget
+      # Required when using deb parameter of apt module
       - xz-utils
 
 - name: Download the AWS CloudWatch Agent Debian package
@@ -13,3 +16,11 @@
 - name: Install AWS CloudWatch Agent Debian package
   ansible.builtin.apt:
     deb: /tmp/amazon-cloudwatch-agent.deb
+
+# Note that the corresponding systemd service and timer are copied
+# over in main.yml.
+- name: Install shell script to attempt to upgrade CloudWatch Agent
+  ansible.builtin.copy:
+    dest: /usr/local/sbin/upgrade-cloudwatch-agent.sh
+    mode: u=rx,g=,o=
+    src: upgrade-cloudwatch-agent-deb.sh
