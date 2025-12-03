@@ -1,6 +1,9 @@
 [Unit]
 Description=Attempt to upgrade the Amazon CloudWatch Agent.
 
+[Install]
+WantedBy=multi-user.target
+
 [Service]
 ExecStart=/usr/local/sbin/upgrade-cloudwatch-agent.sh "{{ url }}"
 # TODO: There are other sandboxing-related directives that could
