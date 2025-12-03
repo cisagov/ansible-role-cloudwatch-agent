@@ -133,7 +133,7 @@
         Install systemd service to attempt to upgrade CloudWatch Agent
       ansible.builtin.template:
         dest: /etc/systemd/system/upgrade-cloudwatch-agent.service
-        mode: u=r,g=,o=
+        mode: u=rw,g=r,o=r
         src: upgrade-cloudwatch-agent.j2.service
         # I'd like to validate the file here, but that can't be done
         # cleanly.  See ansible/ansible#19243.
@@ -144,7 +144,7 @@
         at a daily cadence
       ansible.builtin.copy:
         dest: /etc/systemd/system
-        mode: u=r,g=,o=
+        mode: u=rw,g=r,o=r
         src: upgrade-cloudwatch-agent.timer
         # I'd like to validate the file here, but that can't be done
         # cleanly.  See ansible/ansible#19243.
