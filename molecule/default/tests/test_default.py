@@ -65,6 +65,6 @@ def test_services_not_failed(host, service):
     """Test that the expected services have not failed."""
     cmd_str = f"systemctl is-failed {service}"
     cmd = host.run(cmd_str)
-    print(cmd.stderr)
-    print(cmd.stdout)
-    assert cmd.failed, f"Command {cmd_str} should have failed"
+    assert (
+        cmd.failed
+    ), f"Command {cmd_str} did not fail, which indicates that the service {service} failed."
