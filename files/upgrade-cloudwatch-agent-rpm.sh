@@ -15,7 +15,7 @@ set -o pipefail
 function usage {
   cat << HELP
 Usage:
-  ${0##*/} [rpm_url]
+  ${0##*/} <rpm_url>
 
 Attempt to upgrade the Amazon CloudWatch Agent.  If the package
 pointed to is not an update then nothing is changed.
