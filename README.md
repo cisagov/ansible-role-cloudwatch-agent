@@ -1,6 +1,7 @@
 # ansible-role-cloudwatch-agent #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-cloudwatch-agent/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-cloudwatch-agent/actions)
+[![License](https://img.shields.io/github/license/cisagov/ansible-role-cloudwatch-agent)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/ansible-role-cloudwatch-agent/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-cloudwatch-agent/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role that installs and enables the [Amazon
