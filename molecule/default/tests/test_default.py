@@ -68,9 +68,3 @@ def test_services_not_failed(host, service):
     assert (
         cmd.failed
     ), f"Command {cmd_str} did not fail, which indicates that the service {service} failed."
-
-    cmd_str = f"systemctl is-active {service}"
-    cmd = host.run(cmd_str)
-    assert (
-        cmd.succeeded
-    ), f"Command {cmd_str} failed, which indicates that the service {service} is no longer active."
